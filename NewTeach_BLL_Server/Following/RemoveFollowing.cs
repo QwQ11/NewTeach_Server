@@ -6,6 +6,7 @@ using NewTeach_DAL_Data;
 using NewTeach_DAL_Server;
 using Model;
 using System.Net.Sockets;
+using Model.Sockets;
 
 namespace NewTeach_BLL_Server.Following
 {

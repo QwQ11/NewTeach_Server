@@ -10,15 +10,17 @@ using NewTeach_BLL_Server.File;
 using NewTeach_BLL_Server.Message;
 using NewTeach_BLL_Server.UserInfo;
 using NewTeach_BLL_Server.Following;
+using Model.Sockets;
 
 namespace NewTeach_BLL_Server
 {
-    public class Data_BLL
+    internal class Data_BLL
     {
-        public bool isLogined = false;
-        public int logined_ID = 0;
+        internal bool isLogined = false;
+        internal int logined_ID = 0;
+        internal short account_Type;
 
-        public void Analysis(DataPackage data)
+        internal void Analysis(DataPackage data)
         {
             short type = BitConverter.ToInt16(data.Data, 0);
 
@@ -32,7 +34,7 @@ namespace NewTeach_BLL_Server
                     switch (type)
                     {
                         case 1:            //信息[测试成功]
-                           Message.Message message = new Message.Message(data.Data, logined_ID);
+                            Message.Message message = new Message.Message(data.Data, logined_ID);
                             message.Send();
                             break;
                         case 4:        //获取账户信息[未测试]
@@ -48,7 +50,7 @@ namespace NewTeach_BLL_Server
                             sendFile.Send();
                             break;
                         case 7:        //接收文件[未测试] --机制待修改[重要]
-                                       //开辟新线程[待修改]
+                            //开辟新线程[待修改]
                             NewTeach_BLL_Server.File.ReceiveFile receFile = new File.ReceiveFile(data, logined_ID);
                             receFile.Receive();
                             break;
@@ -86,6 +88,21 @@ namespace NewTeach_BLL_Server
                             DeleteFile deleteFile = new DeleteFile(data, logined_ID);
                             deleteFile.Response();
                             break;
+                    }
+                    if (account_Type == 1)    //学生
+                    {
+                        switch (type)
+                        {
+                            case 18:        //申请跟随
+                                break;
+                        }
+                    }
+                    if (account_Type == 2)      //老师
+                    {
+                        switch (type)
+                        {
+
+                        }
                     }
                 }
                 else

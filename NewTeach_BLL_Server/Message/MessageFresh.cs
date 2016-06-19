@@ -6,6 +6,7 @@ using NewTeach_DAL_Server;
 using NewTeach_DAL_Data;
 using Model;
 using System.Collections;
+using Model.Sockets;
 
 namespace NewTeach_BLL_Server.Message
 {

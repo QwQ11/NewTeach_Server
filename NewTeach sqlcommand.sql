@@ -1,11 +1,8 @@
 ﻿CREATE DATABASE NewTeach;
 
-CREATE TABLE users (user_id INTEGER PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(30) NOT NULL, user_password VARCHAR(20) NOT NULL);
+CREATE TABLE users (user_id INTEGER PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(30) NOT NULL, user_password VARCHAR(20) NOT NULL, type TINYINT, );  -1 Student -2 Teacher
 
-CREATE TABLE users_information (user_id INTEGER, user_sex CHAR(2), user_birthday DATE, user_phone INTEGER, FOREIGN KEY(user_id) REFERENCES users(user_id));
-
-CREATE TABLE users_online(user_id INTEGER);
-
+CREATE TABLE users_information (user_id INTEGER, user_sex TINYINT, user_birthday DATE, user_phone INTEGER, FOREIGN KEY(user_id) REFERENCES users(user_id));
 CREATE TABLE over_messages(sender_id INTEGER, receiver_id INTEGER, time DATETIME, message VARCHAR(1438));
 
 CREATE TABLE following_list(user_id INTEGER, follow_id INTEGER);
@@ -13,7 +10,12 @@ CREATE TABLE black_list(user_id INTEGER, black_id INTEGER);
 CREATE TABLE user_images(user_id INTEGER, file_name VARCHAR(255))
 
 ;
-CREATE TABLE files(user_id INTEGER, file_name VARCHAR(225), file_key CHAR(16),file_length INTEGER);
+CREATE TABLE files(user_id INTEGER, file_name VARCHAR(225), file_key CHAR(16), file_length INTEGER, file_type TINYINT);    --1 Private -2 Public
+CREATE TABLE students(state TINYINT, teacher_id INTEGER, student_id INTEGER)    --1 Allowed -2 Not Allowed -3被拒绝
+CREATE TABLE classes(teacher_id INTEGER, subject TINYINT, start_time DATETIME, end_time DATETIME, class_id INTEGER, class_state TINYINT, FOREIGN KEY(teacher_id) REFERENCES users(user_id))
+CREATE TABLE book_list(class_id INTEGER, student_id INTEGER, FOREIGN KEY(class_id) REFERENCES classes(class_id))
+CREATE TABLE deal_list(class_id INTEGER, student_id, deal_state TINYINT, deal_price INTEGER, deal_review VARCHER(200), FOREIGN KEY(class_id) REFERENCES classes(class_id))
+
 
 --INSERT INTO users(user_name, user_password) VALUES ('大明', 123456);
 

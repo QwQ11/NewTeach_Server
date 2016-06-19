@@ -6,22 +6,23 @@ using NewTeach_DAL_Data;
 using NewTeach_DAL_Server;
 using Model;
 using System.Net.Sockets;
+using Model.Sockets;
 
 namespace NewTeach_BLL_Server.Following
 {
-    public class AddFollowing
+    internal class AddFollowing
     {
         FollowingData followingData;
         TcpClient client;
 
-        public AddFollowing(DataPackage data, int user_id)
+        internal AddFollowing(DataPackage data, int user_id)
         {
             followingData = FollowingConvert.ConvertToClass(data.Data);
             followingData.User_id = user_id;
             client = data.Client;
         }
 
-        public bool Response()
+        internal bool Response()
         {
             try
             {

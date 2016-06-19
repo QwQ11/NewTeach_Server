@@ -8,6 +8,7 @@ using System.IO;
 using File_DAL;
 using NewTeach_DAL_Data;
 using Flags;
+using Model.Sockets;
 
 namespace NewTeach_BLL_Server.File
 {

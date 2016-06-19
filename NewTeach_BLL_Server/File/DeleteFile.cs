@@ -5,22 +5,23 @@ using System.Text;
 using Model;
 using NewTeach_DAL_Data;
 using NewTeach_DAL_Server;
+using Model.Sockets;
 
 namespace NewTeach_BLL_Server.File
 {
-    public class DeleteFile
+    internal class DeleteFile
     {
         FileRequest fr;
         System.Net.Sockets.TcpClient client;
 
-        public DeleteFile(DataPackage data, int user_id)
+        internal DeleteFile(DataPackage data, int user_id)
         {
             fr = FileRequestConvert.ConvertToClass_SendDelete(data.Data);
             fr.User_id = user_id;
             client = data.Client;
         }
 
-        public bool Response()
+        internal bool Response()
         {
             try
             {

@@ -7,6 +7,7 @@ using NewTeach_DAL_Data;
 using NewTeach_DAL_Server;
 using System.Net;
 using NewTeach_DAL_Data;
+using Model.Sockets;
 
 namespace NewTeach_BLL_Server.UserInfo
 {

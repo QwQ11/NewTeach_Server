@@ -5,6 +5,7 @@ using System.Text;
 using Model;
 using NewTeach_DAL_Data;
 using NewTeach_DAL_Server;
+using Model.Sockets;
 
 namespace NewTeach_BLL_Server.Account
 {

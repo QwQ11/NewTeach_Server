@@ -7,6 +7,7 @@ using NewTeach_DAL_Data;
 using NewTeach_DAL_Server;
 using Data;
 using File_DAL;
+using Model.Sockets;
 
 namespace NewTeach_BLL_Server.Account
 {

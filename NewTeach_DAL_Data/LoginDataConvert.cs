@@ -42,7 +42,8 @@ namespace NewTeach_DAL_Data
         {
             LoginData dataResult = new LoginData();
             dataResult.Uid = BitConverter.ToInt32(data, 2);
-            string sTemp = Encoding.Default.GetString(data, 10, 16);
+            dataResult.Type = BitConverter.ToInt16(data, 6);
+            string sTemp = Encoding.Default.GetString(data, 8, 16);
             foreach (char c in sTemp)
             {
                 if (c == '\0')
@@ -54,12 +55,12 @@ namespace NewTeach_DAL_Data
 
         static public byte[] ConvertToBytes(LoginData data)
         {
-            byte[] bResult = new byte[26];
+            byte[] bResult = new byte[12];
 
             BitConverter.GetBytes((short)2).CopyTo(bResult, 0);
             BitConverter.GetBytes(data.Uid).CopyTo(bResult, 2);
             BitConverter.GetBytes(data.User_id).CopyTo(bResult, 6);
-            Encoding.Default.GetBytes(data.User_password).CopyTo(bResult, 10);
+            BitConverter.GetBytes(data.Type).CopyTo(bResult, 10);
 
             return bResult;
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
-using Model;
+using Model.Sockets;
 
 namespace NewTeach_DAL_Server
 {

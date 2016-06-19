@@ -19,11 +19,10 @@ namespace NewTeach_DAL_Data
 
         static public byte[] ConvertToBytes_End(Int32 uid)
         {
-            byte[] bResult = new byte[10];
+            byte[] bResult = new byte[8];
 
             BitConverter.GetBytes((short)2).CopyTo(bResult, 0);
             BitConverter.GetBytes(uid).CopyTo(bResult, 2);
-            BitConverter.GetBytes((Int32)0).CopyTo(bResult, 6);
 
             return bResult;
         }

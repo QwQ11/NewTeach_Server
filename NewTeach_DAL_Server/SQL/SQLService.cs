@@ -46,11 +46,11 @@ namespace NewTeach_DAL_Server
             }
         }
 
-        public int AccountRequest(string pwd)
+        public int AccountRequest(string pwd, short type)
         {
             try {
                 con.Open();
-                sql = "INSERT INTO users(user_password) VALUES(" + pwd + ")";
+                sql = "INSERT INTO users(user_password, type) VALUES(" + pwd + "," + type + ")";
                 MySQLCommand com = new MySQLCommand(sql, con);
                 com.ExecuteNonQuery();
                 sql = "SELECT * FROM users WHERE user_id = LAST_INSERT_ID()";
@@ -59,7 +59,7 @@ namespace NewTeach_DAL_Server
                 int user_id = 0;
                 if(reader.Read())
                 {
-                    user_id = Int32.Parse(reader["user_id"].ToString());
+                    user_id = (int)reader["user_id"];
                 } 
                 sql = "INSERT INTO users_information VALUES(null,null,null,null)";
                 com = new MySQLCommand(sql, con);
@@ -83,7 +83,7 @@ namespace NewTeach_DAL_Server
                 if(reader.Read())
                 {
                     AccountInfo accountInfo = new AccountInfo();
-                    accountInfo.Sex = short.Parse(reader["user_sex"].ToString());
+                    accountInfo.Sex = (short)reader["user_sex"];
                     accountInfo.Birthday = DateTime.Parse(reader["user_birthday"].ToString());
                     accountInfo.Phone = reader["uesr_phome"].ToString();
                     return accountInfo;
@@ -523,6 +523,147 @@ namespace NewTeach_DAL_Server
                 con.Close();
             }
         }
+
+        public bool AddTeacherFollowRequest(int student_id, int teacher_id)
+        {
+            try
+            {
+                con.Open();
+
+                sql = "SELECT * FROM students WHERE teacher_id=" + teacher_id + " AND student_id=" + student_id;
+                MySQLCommand com = new MySQLCommand(sql, con);
+
+                DbDataReader reader = com.ExecuteReader();
+                if(reader.Read())
+                {
+                    if (Int16.Parse(reader["state"].ToString()) == 1)
+                        return false;
+                    else
+                        return true;
+                }
+                else
+                {
+                    sql = "INSERT INTO students(state,teacher_id,student_id) VALUES(" + 2 + "," + teacher_id + "," + student_id + ")";
+                    com = new MySQLCommand(sql, con);
+                    com.ExecuteNonQuery();
+                    return true;
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool DeleteTeacherFollow(int student_id, int teacher_id)
+        {
+            try
+            {
+                con.Open();
+
+                sql = "SELECT * FROM students WHERE teacher_id=" + teacher_id + " AND student_id=" + student_id ;
+                MySQLCommand com = new MySQLCommand(sql, con);
+
+                DbDataReader reader = com.ExecuteReader();
+                if (reader.Read())
+                {
+                    sql = "DELETE FROM students WHERE teacher_id=" + teacher_id + " AND student_id=" + student_id;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<Model.Teach.FollowTeacherInfo> SelAllFollow_Student(int student_id, int uid)
+        {
+            try
+            {
+                con.Open();
+
+                List<Model.Teach.FollowTeacherInfo> arr = new List<Model.Teach.FollowTeacherInfo>();
+
+                sql = "SELECT * FROM students WHERE student_id=" + student_id;
+                MySQLCommand com = new MySQLCommand(sql, con);
+                DbDataReader reader = com.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    arr.Add(new Model.Teach.FollowTeacherInfo
+                    {
+                        State = (short)reader["state"],
+                        Student_id = (int)reader["student_id"],
+                        Teacher_id = (int)reader["teacher_id"],
+                        Uid = uid
+                    });
+                }
+
+                return arr;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public List<Model.Teach.FollowTeacherInfo> SelAllFollow_Teacher(int teacher_id, int uid)
+        {
+            try
+            {
+                con.Open();
+
+                List<Model.Teach.FollowTeacherInfo> arr = new List<Model.Teach.FollowTeacherInfo>();
+
+                sql = "SELECT * FROM students WHERE student_id=" + teacher_id;
+                MySQLCommand com = new MySQLCommand(sql, con);
+                DbDataReader reader = com.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    arr.Add(new Model.Teach.FollowTeacherInfo
+                    {
+                        State = (short)reader["state"],
+                        Student_id = (int)reader["student_id"],
+                        Teacher_id = (int)reader["teacher_id"],
+                        Uid = uid
+                    });
+                }
+
+                return arr;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
+
         //public bool DelOverMessages(int bool)
 
 //         --插入用户

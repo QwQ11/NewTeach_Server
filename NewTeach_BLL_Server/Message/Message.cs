@@ -9,6 +9,7 @@ using NewTeach_DAL_Server;
 using System.Net;
 using System.Collections;
 using System.Threading;
+using Model.Sockets;
 
 namespace NewTeach_BLL_Server.Message
 {

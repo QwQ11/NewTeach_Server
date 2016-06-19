@@ -13,6 +13,15 @@ namespace Model
 
         private int uid;
 
+        private short type;
+
+        public short Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
+
+
         public int User_id
         {
             get

@@ -86,6 +86,11 @@
     <Compile Include="ImageMessage\ReceiveImage.cs" />
     <Compile Include="ImageMessage\SendImage.cs" />
     <Compile Include="Message\MessageFresh.cs" />
+    <Compile Include="Teach\FollowTeacherRequest\General\SelAllFollow.cs" />
+    <Compile Include="Teach\FollowTeacherRequest\Students\RequestFollow.cs" />
+    <Compile Include="Teach\FollowTeacherRequest\Students\DeleteFollow.cs" />
+    <Compile Include="Teach\FollowTeacherRequest\Teachers\DeleteFollow.cs" />
+    <Compile Include="Teach\FollowTeacherRequest\Teachers\TurnDownFollow.cs" />
     <Compile Include="UserInfo\EditAccountInfo.cs" />
     <Compile Include="Message\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,6 +145,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
