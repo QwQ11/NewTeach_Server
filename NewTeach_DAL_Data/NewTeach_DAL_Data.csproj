@@ -67,6 +67,7 @@
     <Compile Include="RefreshRequestConvert.cs" />
     <Compile Include="SelectAccountConvert.cs" />
     <Compile Include="SelUserImageConvert.cs" />
+    <Compile Include="Teach\ClassInfoConvert.cs" />
     <Compile Include="Teach\FileSelectionConvert.cs" />
     <Compile Include="Teach\FollowTeacherInfoConvert.cs" />
     <Compile Include="Teach\FollowTeacherInfoConvert_Re.cs" />

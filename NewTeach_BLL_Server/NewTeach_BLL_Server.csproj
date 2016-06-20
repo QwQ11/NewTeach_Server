@@ -87,6 +87,13 @@
     <Compile Include="ImageMessage\ReceiveImage.cs" />
     <Compile Include="ImageMessage\SendImage.cs" />
     <Compile Include="Message\MessageFresh.cs" />
+    <Compile Include="Teach\Classes\Students\BookClass.cs" />
+    <Compile Include="Teach\Classes\Students\CancelClass.cs" />
+    <Compile Include="Teach\Classes\Students\GetClassInfo.cs" />
+    <Compile Include="Teach\Classes\Teachers\CreateClass.cs" />
+    <Compile Include="Teach\Classes\Teachers\DeleteClass.cs" />
+    <Compile Include="Teach\Classes\Teachers\EditClassInfo.cs" />
+    <Compile Include="Teach\Classes\Teachers\RemoveStudents.cs" />
     <Compile Include="Teach\FollowTeacherRequest\General\SelAllFollow.cs" />
     <Compile Include="Teach\FollowTeacherRequest\Students\RequestFollow.cs" />
     <Compile Include="Teach\FollowTeacherRequest\Students\DeleteFollow.cs" />
