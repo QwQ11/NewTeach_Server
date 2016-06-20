@@ -10,7 +10,7 @@ namespace NewTeach_DAL_Server.File
 {
     public class DeleteFile
     {
-        public FileRequestResponse Delete(FileRequest fr)
+        public FileRequestResponse_mod Delete(FileInfo_mod fr)
         {
             string path = FileCheck.SelUserFilePath(fr.User_id, fr.FileName);
             if (path != FileFlags.FileExistsFailedFlag)
@@ -21,20 +21,20 @@ namespace NewTeach_DAL_Server.File
                     try
                     {
                         System.IO.File.Delete(path);
-                        return new FileRequestResponse { Uid = fr.Uid, Op_code = FileFlags.FileOPSucceed };
+                        return new FileRequestResponse_mod { Uid = fr.Uid, Op_code = FileFlags.FileOPSucceed };
                     }
                     catch
                     {
-                        return new FileRequestResponse { Uid = fr.Uid, Op_code = FileFlags.FileOPFailed };
+                        return new FileRequestResponse_mod { Uid = fr.Uid, Op_code = FileFlags.FileOPFailed };
                     }
                 }
                 else
                 {
-                    return new FileRequestResponse { Uid = fr.Uid, Op_code = FileFlags.FileExistsFalse };
+                    return new FileRequestResponse_mod { Uid = fr.Uid, Op_code = FileFlags.FileExistsFalse };
                 }
             }
             else
-                return new FileRequestResponse { Uid = fr.Uid, Op_code = FileFlags.FileExistsFalse };
+                return new FileRequestResponse_mod { Uid = fr.Uid, Op_code = FileFlags.FileExistsFalse };
         }
 
 

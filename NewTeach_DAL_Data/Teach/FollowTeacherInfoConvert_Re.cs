@@ -8,7 +8,7 @@ namespace NewTeach_DAL_Data.Teach
 {
     public static class FollowTeacherInfoConvert_Re
     {
-        static public byte[] ConvertToBytes_Query(FollowTeacherInfo_Re data)
+        static public byte[] ConvertToBytes_Query(FollowTeacherInfo_Re_mod data)
         {
             byte[] bResult = new byte[6];
 

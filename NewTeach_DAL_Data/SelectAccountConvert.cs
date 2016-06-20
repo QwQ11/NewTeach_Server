@@ -8,9 +8,9 @@ namespace NewTeach_DAL_Data
 {
     static public class SelectAccountConvert
     {
-        static public SelectAccount ConvertToClass(byte[] data)
+        static public SelectAccount_mod ConvertToClass(byte[] data)
         {
-            SelectAccount sel = new SelectAccount();
+            SelectAccount_mod sel = new SelectAccount_mod();
             sel.Uid = BitConverter.ToInt32(data, 2);
             sel.Sel_info = Encoding.Default.GetString(data, 6, 30);
 

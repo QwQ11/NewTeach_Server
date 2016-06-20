@@ -8,9 +8,9 @@ namespace NewTeach_DAL_Data
 {
     static public class SelUserImageConvert
     {
-        static public UserImage ConvertToClass(byte[] data)
+        static public UserImage_mod ConvertToClass(byte[] data)
         {
-            UserImage userImage = new UserImage();
+            UserImage_mod userImage = new UserImage_mod();
 
             userImage.Uid = BitConverter.ToInt32(data, 2);
             userImage.User_id = BitConverter.ToInt32(data, 6);
@@ -19,7 +19,7 @@ namespace NewTeach_DAL_Data
             return userImage;
         }
 
-        static public byte[] ConvertToBytes(UserImage data)
+        static public byte[] ConvertToBytes(UserImage_mod data)
         {
             byte[] bResult = new byte[12];
 

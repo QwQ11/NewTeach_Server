@@ -12,7 +12,7 @@ namespace NewTeach_BLL_Server.Following
 {
     internal class AddFollowing
     {
-        FollowingData followingData;
+        FollowingData_mod followingData;
         TcpClient client;
 
         internal AddFollowing(DataPackage data, int user_id)

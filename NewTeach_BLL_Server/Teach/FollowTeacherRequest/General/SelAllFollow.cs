@@ -28,7 +28,7 @@ namespace Newtalking_BLL_Server.Teach.FollowTeacherRequest.General
         internal void Response()
         {
             SQLService sql = new SQLService();
-            List<FollowTeacherInfo> arrFti;
+            List<FollowTeacherInfo_mod> arrFti;
             Sender sender = new Sender();
 
             if(type==1)
@@ -38,7 +38,7 @@ namespace Newtalking_BLL_Server.Teach.FollowTeacherRequest.General
 
             if (arrFti != null && arrFti.Count != 0)
             {
-                foreach (FollowTeacherInfo fti in arrFti)
+                foreach (FollowTeacherInfo_mod fti in arrFti)
                 {
                     sender.SendMessage(new DataPackage
                     {

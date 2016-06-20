@@ -7,8 +7,8 @@
     <ProjectGuid>{FBCD4430-FEA8-40DA-9745-A1CB38511D4B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Newtalking_Service</RootNamespace>
-    <AssemblyName>Newtalking_Service</AssemblyName>
+    <RootNamespace>NewTeach_Service</RootNamespace>
+    <AssemblyName>NewTeach_Service</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

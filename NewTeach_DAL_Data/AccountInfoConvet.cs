@@ -8,7 +8,7 @@ namespace NewTeach_DAL_Data
 {
     static public class AccountInfoConvet
     {
-        static public byte[] ConvertToBytes(AccountInfo data)
+        static public byte[] ConvertToBytes(AccountInfo_mod data)
         {
             //4+2+4+24
             byte[] bResult = new byte[48];
@@ -23,9 +23,9 @@ namespace NewTeach_DAL_Data
             return bResult;
         }
 
-        static public AccountInfo ConvertToClass(byte[] data)
+        static public AccountInfo_mod ConvertToClass(byte[] data)
         {
-            AccountInfo dataResult = new AccountInfo();
+            AccountInfo_mod dataResult = new AccountInfo_mod();
 
             dataResult.User_id = BitConverter.ToInt32(data, 2);
             dataResult.Sex = BitConverter.ToInt16(data, 6);

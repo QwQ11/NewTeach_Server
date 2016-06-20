@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NewTeach_BLL_Server.Teach.FollowTeacherRequest.Teachers
 {
-    class TurnDownFollow
+    public class TurnDownFollow
     {
     }
 }

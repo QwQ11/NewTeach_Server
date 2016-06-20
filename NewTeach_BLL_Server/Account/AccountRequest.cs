@@ -20,7 +20,7 @@ namespace NewTeach_BLL_Server.Account
             SQLService sql = new SQLService();
             dataResponse.Client = data.Client;
 
-            LoginData loginData = AccountRequestConvert.ConvertToClass(data.Data);
+            LoginData_mod loginData = AccountRequestConvert.ConvertToClass(data.Data);
             loginData.User_id = sql.AccountRequest(loginData.User_password, loginData.Type);
 
             dataResponse.Data = AccountRequestConvert.ConvertToBytes(loginData);

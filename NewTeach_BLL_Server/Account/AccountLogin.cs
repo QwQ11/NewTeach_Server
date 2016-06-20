@@ -13,7 +13,7 @@ namespace NewTeach_BLL_Server.Account
 {
     internal class AccountLogin
     {
-        internal LoginData loginData = new LoginData();
+        internal LoginData_mod loginData = new LoginData_mod();
         bool isLogined = false;
         System.Net.Sockets.TcpClient client;
         int user_id;

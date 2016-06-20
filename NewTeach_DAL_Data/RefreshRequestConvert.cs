@@ -8,9 +8,9 @@ namespace NewTeach_DAL_Data
 {
     static public class RefreshRequestConvert
     {
-        static public RefreshRequest ConvertToClass(byte[] data)
+        static public RefreshRequest_mod ConvertToClass(byte[] data)
         {
-            RefreshRequest rr = new RefreshRequest();
+            RefreshRequest_mod rr = new RefreshRequest_mod();
             rr.Uid = BitConverter.ToInt32(data, 2);
             rr.User_id = BitConverter.ToInt32(data, 6);
 

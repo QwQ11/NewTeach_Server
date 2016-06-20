@@ -23,7 +23,7 @@ namespace NewTeach_DAL_Server
         string sql = "";
         MySQLConnection con = new MySQLConnection(new MySQLConnectionString("localhost", "NewTeach", "root", Server_Properties.Property.SqlKey).AsString);
 
-        public bool Login(LoginData data)
+        public bool Login(LoginData_mod data)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace NewTeach_DAL_Server
             }
         }
 
-        public AccountInfo AccountInfoReader(int user_id)
+        public AccountInfo_mod AccountInfoReader(int user_id)
         {
             try {
                 con.Open();
@@ -82,7 +82,7 @@ namespace NewTeach_DAL_Server
                 DbDataReader reader = com.ExecuteReader();
                 if(reader.Read())
                 {
-                    AccountInfo accountInfo = new AccountInfo();
+                    AccountInfo_mod accountInfo = new AccountInfo_mod();
                     accountInfo.Sex = (short)reader["user_sex"];
                     accountInfo.Birthday = DateTime.Parse(reader["user_birthday"].ToString());
                     accountInfo.Phone = reader["uesr_phome"].ToString();
@@ -100,7 +100,7 @@ namespace NewTeach_DAL_Server
             }
         }
 
-        public bool AccountInfoEditor(AccountInfo accountInfo)
+        public bool AccountInfoEditor(AccountInfo_mod accountInfo)
         {
             try
             {
@@ -184,7 +184,7 @@ namespace NewTeach_DAL_Server
             }
         }
 
-        public bool InsertIntoOverMessages(MessageData msg)
+        public bool InsertIntoOverMessages(MessageData_mod msg)
         {
             try
             {
@@ -204,7 +204,7 @@ namespace NewTeach_DAL_Server
             }
         }
 
-        public List<MessageData> SelOverMessages(int user_id)
+        public List<MessageData_mod> SelOverMessages(int user_id)
         {
             try
             {
@@ -215,10 +215,10 @@ namespace NewTeach_DAL_Server
                 MySQLDataAdapter adp = new MySQLDataAdapter(com);
                 adp.Fill(ds);
 
-                List<MessageData> messages = new List<MessageData>();
+                List<MessageData_mod> messages = new List<MessageData_mod>();
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    MessageData msg = new MessageData();
+                    MessageData_mod msg = new MessageData_mod();
                     msg.User_id = (int)dr["sender_id"];
                     msg.Receiver_id = (int)dr["receiver_id"];
                     msg.Time = DateTime.Parse(dr["time"].ToString());
@@ -242,7 +242,7 @@ namespace NewTeach_DAL_Server
             }
         }
 
-        public ArrayList SearchAccount(SelectAccount selAccount)
+        public ArrayList SearchAccount(SelectAccount_mod selAccount)
         {
             try
             {
@@ -261,7 +261,7 @@ namespace NewTeach_DAL_Server
                 ArrayList arr = new ArrayList();
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    AccountInfo accountInfo = new AccountInfo();
+                    AccountInfo_mod accountInfo = new AccountInfo_mod();
                     accountInfo.User_id = Int32.Parse(dr["user_id"].ToString());
                     accountInfo.User_name = dr["user_name"].ToString();
                     accountInfo.Sex = short.Parse(dr["user_sex"].ToString());
@@ -277,7 +277,7 @@ namespace NewTeach_DAL_Server
                     DbDataReader reader = com.ExecuteReader();
                     if(reader.Read())
                     {
-                        AccountInfo accountInfo = new AccountInfo();
+                        AccountInfo_mod accountInfo = new AccountInfo_mod();
                         accountInfo.User_id = Int32.Parse(reader["user_id"].ToString());
                         accountInfo.User_name = reader["user_name"].ToString();
                         accountInfo.Sex = short.Parse(reader["user_sex"].ToString());
@@ -303,7 +303,7 @@ namespace NewTeach_DAL_Server
             }
         }
 
-        public bool AddFollowing(FollowingData data)
+        public bool AddFollowing(FollowingData_mod data)
         {
             try
             {
@@ -335,7 +335,7 @@ namespace NewTeach_DAL_Server
             }
         }
 
-        public bool RemoveFollowing(FollowingData data)
+        public bool RemoveFollowing(FollowingData_mod data)
         {
             try
             {
@@ -453,6 +453,8 @@ namespace NewTeach_DAL_Server
                 sql= "DELETE FROM files WHERE file_name=" + file_name + " AND user_id=" + user_id + " AND file_key=" + file_key;
                 com = new MySQLCommand(sql, con);
                 com.ExecuteNonQuery();
+                //从文件动态表中删除
+
                 return true;
             }
             catch
@@ -465,7 +467,7 @@ namespace NewTeach_DAL_Server
             }
         }
 
-        public bool UpLoadFile(int user_id, string strFileName, string strFileKey, int file_length)
+        public bool UpLoadFile(int user_id, string strFileName, string strFileKey, int file_length, int file_type)
         {
             try
             {
@@ -479,9 +481,10 @@ namespace NewTeach_DAL_Server
                     return false;
                 else
                 {
-                    sql = "INSERT INTO files(user_id, file_name, file_key, file_length) VALUES(" + user_id + ", " + strFileName + ", " + strFileKey + "" + file_length + ")";
+                    sql = "INSERT INTO files(user_id, file_name, file_key, file_length, file_type) VALUES(" + user_id + ", " + strFileName + ", " + strFileKey + "" + file_length + "," + file_type + ")";
                     com = new MySQLCommand(sql, con);
                     com.ExecuteNonQuery();
+                    //添加到文件动态表
                 }
                 
                 return true;
@@ -522,6 +525,47 @@ namespace NewTeach_DAL_Server
             {
                 con.Close();
             }
+        }
+
+        public bool ChangeFileType(int user_id, string file_name, short file_type)
+        {
+            try
+            {
+                //改变文件可见程度
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+
+            }
+        }
+
+        public List<Model.FileInfo_mod> SelTeacherFiles(int student_id, int teacher_id)
+        {
+            //查看一个老师所有文件（若没有跟随则查看共享文件）
+            return null;
+        }
+
+        public List<Model.FileInfo_mod> SelFileDynamic(int student_id)
+        {
+            //查看文件动态
+            return null;
+        }
+
+        public bool DelFileDynamic(int student_id)
+        {
+            //清除文件动态
+            return true;
+        }
+
+        public List<Model.FileInfo_mod> SelAllFiles(int student_id)
+        {
+            //查询所有文件
+            return null;
         }
 
         public bool AddTeacherFollowRequest(int student_id, int teacher_id)
@@ -593,13 +637,13 @@ namespace NewTeach_DAL_Server
             }
         }
 
-        public List<Model.Teach.FollowTeacherInfo> SelAllFollow_Student(int student_id, int uid)
+        public List<Model.Teach.FollowTeacherInfo_mod> SelAllFollow_Student(int student_id, int uid)
         {
             try
             {
                 con.Open();
 
-                List<Model.Teach.FollowTeacherInfo> arr = new List<Model.Teach.FollowTeacherInfo>();
+                List<Model.Teach.FollowTeacherInfo_mod> arr = new List<Model.Teach.FollowTeacherInfo_mod>();
 
                 sql = "SELECT * FROM students WHERE student_id=" + student_id;
                 MySQLCommand com = new MySQLCommand(sql, con);
@@ -607,7 +651,7 @@ namespace NewTeach_DAL_Server
 
                 while (reader.Read())
                 {
-                    arr.Add(new Model.Teach.FollowTeacherInfo
+                    arr.Add(new Model.Teach.FollowTeacherInfo_mod
                     {
                         State = (short)reader["state"],
                         Student_id = (int)reader["student_id"],
@@ -627,13 +671,14 @@ namespace NewTeach_DAL_Server
                 con.Close();
             }
         }
-        public List<Model.Teach.FollowTeacherInfo> SelAllFollow_Teacher(int teacher_id, int uid)
+
+        public List<Model.Teach.FollowTeacherInfo_mod> SelAllFollow_Teacher(int teacher_id, int uid)
         {
             try
             {
                 con.Open();
 
-                List<Model.Teach.FollowTeacherInfo> arr = new List<Model.Teach.FollowTeacherInfo>();
+                List<Model.Teach.FollowTeacherInfo_mod> arr = new List<Model.Teach.FollowTeacherInfo_mod>();
 
                 sql = "SELECT * FROM students WHERE student_id=" + teacher_id;
                 MySQLCommand com = new MySQLCommand(sql, con);
@@ -641,7 +686,7 @@ namespace NewTeach_DAL_Server
 
                 while (reader.Read())
                 {
-                    arr.Add(new Model.Teach.FollowTeacherInfo
+                    arr.Add(new Model.Teach.FollowTeacherInfo_mod
                     {
                         State = (short)reader["state"],
                         Student_id = (int)reader["student_id"],

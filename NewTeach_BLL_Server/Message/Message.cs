@@ -16,7 +16,7 @@ namespace NewTeach_BLL_Server.Message
     internal class Message
     {
         byte[] bData;
-        MessageData msgData = new MessageData();
+        MessageData_mod msgData = new MessageData_mod();
 
         internal Message(byte[] data, int user_id)
         {

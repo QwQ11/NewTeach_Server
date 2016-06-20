@@ -14,13 +14,13 @@ using Model.Sockets;
 
 namespace NewTeach_BLL_Server
 {
-    internal class Data_BLL
+    public class Data_BLL
     {
-        internal bool isLogined = false;
-        internal int logined_ID = 0;
-        internal short account_Type;
+        public bool isLogined = false;
+        public int logined_ID = 0;
+        public short account_Type;
 
-        internal void Analysis(DataPackage data)
+        public void Analysis(DataPackage data)
         {
             short type = BitConverter.ToInt16(data.Data, 0);
 
@@ -51,7 +51,7 @@ namespace NewTeach_BLL_Server
                             break;
                         case 7:        //接收文件[未测试] --机制待修改[重要]
                             //开辟新线程[待修改]
-                            NewTeach_BLL_Server.File.ReceiveFile receFile = new File.ReceiveFile(data, logined_ID);
+                            NewTeach_BLL_Server.File.UploadFile receFile = new File.UploadFile(data, logined_ID);
                             receFile.Receive();
                             break;
                         case 8:         //用户头像查看申请[未测试]

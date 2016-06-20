@@ -14,7 +14,7 @@ namespace NewTeach_BLL_Server.Account
 {
     internal class UploadUserImage
     {
-        UserImage userImage;
+        UserImage_mod userImage;
         TcpClient client;
 
         internal UploadUserImage(DataPackage data, int user_id)

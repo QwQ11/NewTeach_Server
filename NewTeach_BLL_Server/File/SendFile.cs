@@ -24,8 +24,8 @@ namespace NewTeach_BLL_Server.File
         {
             dataPack = dataPackTemp;
             //Buffer.BlockCopy(dataPackTemp.Data, 2, bPackBegin, 0, 4);
-            
-            FileRequest fr = FileRequestConvert.ConvertToClass_SendDelete(dataPackTemp.Data);
+
+            Model.FileInfo_mod fr = FileInfoConvert.ConvertToClass_Transport(dataPackTemp.Data);
             path = FileCheck.SelUserFilePath(fr.User_id, fr.FileName);
             uid = fr.Uid;
 
@@ -47,7 +47,7 @@ namespace NewTeach_BLL_Server.File
             }
             else
             {
-                FileRequestResponse frr = new FileRequestResponse
+                FileRequestResponse_mod frr = new FileRequestResponse_mod
                 {
                     Uid = uid,
                     Op_code = Flags.FileFlags.FileExistsTrue
@@ -58,7 +58,7 @@ namespace NewTeach_BLL_Server.File
                 sender.SendMessage(new DataPackage
                 {
                     Client = dataPack.Client,
-                    Data = FileRequestConvert.ConvertToBytes_Response(frr)
+                    Data = FileInfoConvert.ConvertToBytes_Response(frr)
                 });
                 return false;
             }

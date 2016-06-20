@@ -8,7 +8,7 @@ namespace NewTeach_DAL_Data
 {
     static public class MessageDataConvert
     {
-        static public byte[] ConvertToBytes(MessageData data)
+        static public byte[] ConvertToBytes(MessageData_mod data)
         {
             byte[] bResult = new byte[1452];
 
@@ -22,9 +22,9 @@ namespace NewTeach_DAL_Data
             return bResult;
         }
 
-        static public MessageData ConvertToClass(byte[] bReceived)
+        static public MessageData_mod ConvertToClass(byte[] bReceived)
         {
-            MessageData dataResult = new MessageData();
+            MessageData_mod dataResult = new MessageData_mod();
 
             dataResult.User_id = BitConverter.ToInt32(bReceived, 2);
             dataResult.Receiver_id = BitConverter.ToInt32(bReceived, 6);

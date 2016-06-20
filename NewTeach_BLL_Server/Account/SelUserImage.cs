@@ -21,7 +21,7 @@ namespace NewTeach_BLL_Server.Account
 
         internal SelUserImage(DataPackage dataPackTemp)
         {
-            UserImage userImage = SelUserImageConvert.ConvertToClass(dataPackTemp.Data);
+            UserImage_mod userImage = SelUserImageConvert.ConvertToClass(dataPackTemp.Data);
             uid = userImage.Uid;
             //SQLService sql = new SQLService();
             //string strFileName = sql.SelUserImageName(userImage.User_id);
@@ -35,7 +35,7 @@ namespace NewTeach_BLL_Server.Account
             {
                 sender.SendMessage(new DataPackage
                 {
-                    Data = FileRequestConvert.ConvertToBytes_Response(new FileRequestResponse
+                    Data = FileInfoConvert.ConvertToBytes_Response(new FileRequestResponse_mod
                     {
                         Uid = uid,
                         Op_code = Flags.FileFlags.FileExistsFalse
@@ -49,7 +49,7 @@ namespace NewTeach_BLL_Server.Account
 
             sender.SendMessage(new DataPackage
             {
-                Data = SelUserImageConvert.ConvertToBytes(new UserImage
+                Data = SelUserImageConvert.ConvertToBytes(new UserImage_mod
                 {
                     Uid = uid,
                     File_length = GetFileInfo.GetLength(path)

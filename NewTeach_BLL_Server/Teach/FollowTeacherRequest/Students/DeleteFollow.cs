@@ -13,7 +13,7 @@ namespace NewTeach_BLL_Server.Teach.FollowTeacherRequest.Students
 {
     internal class DeleteFollow
     {
-        FollowTeacherInfo fti;
+        FollowTeacherInfo_mod fti;
         System.Net.Sockets.TcpClient client;
 
         internal DeleteFollow(DataPackage dataPackage, int user_id)
@@ -33,7 +33,7 @@ namespace NewTeach_BLL_Server.Teach.FollowTeacherRequest.Students
                 sender.SendMessage(new DataPackage
                 {
                     Client = client,
-                    Data = FollowTeacherInfoConvert_Re.ConvertToBytes_Query(new FollowTeacherInfo_Re
+                    Data = FollowTeacherInfoConvert_Re.ConvertToBytes_Query(new FollowTeacherInfo_Re_mod
                     {
                         Uid = fti.Uid,
                         IsSucceed = sql.DeleteTeacherFollow(fti.Student_id, fti.Teacher_id)

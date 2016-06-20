@@ -7,8 +7,8 @@
     <ProjectGuid>{E0E4E6D0-0E15-4530-BE3E-394F7004B4EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Newtalking_BLL_Server</RootNamespace>
-    <AssemblyName>Newtalking_BLL_Server</AssemblyName>
+    <RootNamespace>NewTeach_BLL_Server</RootNamespace>
+    <AssemblyName>NewTeach_BLL_Server</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -77,8 +77,9 @@
     <Compile Include="Account\AccountRequest.cs" />
     <Compile Include="Account\SearchAccount.cs" />
     <Compile Include="Data_BLL.cs" />
+    <Compile Include="File\ChangeFileType.cs" />
     <Compile Include="File\DeleteFile.cs" />
-    <Compile Include="File\ReceiveFile.cs" />
+    <Compile Include="File\UploadFile.cs" />
     <Compile Include="Account\UploadUserImage.cs" />
     <Compile Include="Account\SelUserImage.cs" />
     <Compile Include="Following\AddFollowing.cs" />
@@ -91,6 +92,9 @@
     <Compile Include="Teach\FollowTeacherRequest\Students\DeleteFollow.cs" />
     <Compile Include="Teach\FollowTeacherRequest\Teachers\DeleteFollow.cs" />
     <Compile Include="Teach\FollowTeacherRequest\Teachers\TurnDownFollow.cs" />
+    <Compile Include="Teach\SelFiles\SelAllFiles.cs" />
+    <Compile Include="Teach\SelFiles\SelFileDynamic.cs" />
+    <Compile Include="Teach\SelFiles\SelTeacherFile.cs" />
     <Compile Include="UserInfo\EditAccountInfo.cs" />
     <Compile Include="Message\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

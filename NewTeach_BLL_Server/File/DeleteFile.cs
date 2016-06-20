@@ -11,12 +11,12 @@ namespace NewTeach_BLL_Server.File
 {
     internal class DeleteFile
     {
-        FileRequest fr;
+        FileInfo_mod fr;
         System.Net.Sockets.TcpClient client;
 
         internal DeleteFile(DataPackage data, int user_id)
         {
-            fr = FileRequestConvert.ConvertToClass_SendDelete(data.Data);
+            fr = FileInfoConvert.ConvertToClass_Transport(data.Data);
             fr.User_id = user_id;
             client = data.Client;
         }
@@ -26,12 +26,12 @@ namespace NewTeach_BLL_Server.File
             try
             {
                 NewTeach_DAL_Server.File.DeleteFile df = new NewTeach_DAL_Server.File.DeleteFile();
-                FileRequestResponse frr = df.Delete(fr);
+                FileRequestResponse_mod frr = df.Delete(fr);
 
                 Sender sender = new Sender();
                 sender.SendMessage(new DataPackage
                 {
-                    Data = FileRequestConvert.ConvertToBytes_Response(frr),
+                    Data = FileInfoConvert.ConvertToBytes_Response(frr),
                     Client = client
                 });
 

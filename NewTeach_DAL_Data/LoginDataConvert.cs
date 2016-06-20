@@ -18,9 +18,9 @@ namespace NewTeach_DAL_Data
             return bResult;
         }
 
-        static public LoginData ConvertToClass(byte[] data)
+        static public LoginData_mod ConvertToClass(byte[] data)
         {
-            LoginData dataResult = new LoginData();
+            LoginData_mod dataResult = new LoginData_mod();
             dataResult.Uid = BitConverter.ToInt32(data, 2);
             dataResult.User_id = BitConverter.ToInt32(data, 6);
 
@@ -38,9 +38,9 @@ namespace NewTeach_DAL_Data
 
     static public class AccountRequestConvert
     {
-        static public LoginData ConvertToClass(byte[] data)
+        static public LoginData_mod ConvertToClass(byte[] data)
         {
-            LoginData dataResult = new LoginData();
+            LoginData_mod dataResult = new LoginData_mod();
             dataResult.Uid = BitConverter.ToInt32(data, 2);
             dataResult.Type = BitConverter.ToInt16(data, 6);
             string sTemp = Encoding.Default.GetString(data, 8, 16);
@@ -53,7 +53,7 @@ namespace NewTeach_DAL_Data
             return dataResult;
         }
 
-        static public byte[] ConvertToBytes(LoginData data)
+        static public byte[] ConvertToBytes(LoginData_mod data)
         {
             byte[] bResult = new byte[12];
 

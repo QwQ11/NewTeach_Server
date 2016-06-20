@@ -73,21 +73,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountInfo.cs" />
-    <Compile Include="AddFollowing.cs" />
-    <Compile Include="FileRequest.cs" />
-    <Compile Include="FileRequestResponse.cs" />
-    <Compile Include="LoginData.cs" />
-    <Compile Include="MessageData.cs" />
+    <Compile Include="AccountInfo_mod.cs" />
+    <Compile Include="AddFollowing_mod.cs" />
+    <Compile Include="FileInfo_mod.cs" />
+    <Compile Include="FileRequestResponse_mod.cs" />
+    <Compile Include="LoginData_mod.cs" />
+    <Compile Include="MessageData_mod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sockets\DataPackage.cs" />
-    <Compile Include="ReceiveFile.cs" />
-    <Compile Include="ReceiveFileRequest.cs" />
-    <Compile Include="RefreshRequest.cs" />
-    <Compile Include="SelectAccount.cs" />
-    <Compile Include="Teach\FollowTeacherInfo.cs" />
-    <Compile Include="Teach\FollowTeacherInfo_Re.cs" />
-    <Compile Include="UserImage.cs" />
+    <Compile Include="Teach\SelAllFiles_mod.cs" />
+    <Compile Include="Teach\SelFileDynamic_mod.cs" />
+    <Compile Include="Teach\SelTeacherFile_mod.cs" />
+    <Compile Include="UploadFileRequest_mod.cs" />
+    <Compile Include="RefreshRequest_mod.cs" />
+    <Compile Include="SelectAccount_mod.cs" />
+    <Compile Include="Teach\FollowTeacherInfo_mod.cs" />
+    <Compile Include="Teach\FollowTeacherInfo_Re_mod.cs" />
+    <Compile Include="UserImage_mod.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

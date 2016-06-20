@@ -8,9 +8,9 @@ namespace NewTeach_DAL_Data
 {
     static public class FollowingConvert
     {
-        static public FollowingData ConvertToClass(byte[] data)
+        static public FollowingData_mod ConvertToClass(byte[] data)
         {
-            FollowingData followingData = new FollowingData();
+            FollowingData_mod followingData = new FollowingData_mod();
             followingData.Uid = BitConverter.ToInt32(data, 2);
             followingData.User_id = BitConverter.ToInt32(data, 6);
             followingData.Following_id = BitConverter.ToInt32(data, 10);
@@ -18,7 +18,7 @@ namespace NewTeach_DAL_Data
             return followingData;
         }
 
-        static public byte[] ConvertToBytes(FollowingData data, bool isSucceed)
+        static public byte[] ConvertToBytes(FollowingData_mod data, bool isSucceed)
         {
             byte[] bResult = new byte[6];
 

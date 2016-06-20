@@ -13,7 +13,7 @@ namespace NewTeach_BLL_Server.Following
     internal class RemoveFollowing
     {
         TcpClient client;
-        FollowingData followingData;
+        FollowingData_mod followingData;
 
         internal RemoveFollowing(DataPackage data, int user_id)
         {

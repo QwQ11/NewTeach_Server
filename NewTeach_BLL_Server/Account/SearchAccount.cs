@@ -12,7 +12,7 @@ namespace NewTeach_BLL_Server.Account
     internal class SearchAccount
     {
         System.Net.Sockets.TcpClient client;
-        SelectAccount selAcc;
+        SelectAccount_mod selAcc;
 
         internal SearchAccount(DataPackage dpk)
         {
@@ -31,7 +31,7 @@ namespace NewTeach_BLL_Server.Account
                 {
                     Sender sender = new Sender();
                     DataPackage dpk = new DataPackage();
-                    AccountInfoConvet.ConvertToBytes((AccountInfo)obj);
+                    AccountInfoConvet.ConvertToBytes((AccountInfo_mod)obj);
                     dpk.Client = client;
                     sender.SendMessage(dpk);
                 }

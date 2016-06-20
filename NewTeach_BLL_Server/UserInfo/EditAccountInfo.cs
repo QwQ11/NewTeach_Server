@@ -13,7 +13,7 @@ namespace NewTeach_BLL_Server.UserInfo
 {
     internal class EditAccountInfo
     {
-        AccountInfo accountInfo = new AccountInfo();
+        AccountInfo_mod accountInfo = new AccountInfo_mod();
         DataPackage dataSend = new DataPackage();
 
         internal EditAccountInfo(DataPackage data, int user_id)

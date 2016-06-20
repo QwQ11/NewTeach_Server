@@ -13,7 +13,7 @@ namespace NewTeach_BLL_Server.Teach.FollowTeacherRequest.Students
 {
     internal class RequestFollow
     {
-        FollowTeacherInfo fti;
+        FollowTeacherInfo_mod fti;
         System.Net.Sockets.TcpClient client;
 
         internal RequestFollow(DataPackage dataPackage)
@@ -32,7 +32,7 @@ namespace NewTeach_BLL_Server.Teach.FollowTeacherRequest.Students
                 sender.SendMessage(new DataPackage
                 {
                     Client = client,
-                    Data = FollowTeacherInfoConvert_Re.ConvertToBytes_Query(new FollowTeacherInfo_Re
+                    Data = FollowTeacherInfoConvert_Re.ConvertToBytes_Query(new FollowTeacherInfo_Re_mod
                     {
                         Uid = fti.Uid,
                         IsSucceed = sql.AddTeacherFollowRequest(fti.Student_id, fti.Teacher_id)

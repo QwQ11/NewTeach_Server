@@ -12,7 +12,7 @@ namespace NewTeach_BLL_Server.UserInfo
 {
     internal class ReadUserInfo
     {
-        AccountInfo accountInfo = new AccountInfo();
+        AccountInfo_mod accountInfo = new AccountInfo_mod();
         DataPackage dataSend = new DataPackage();
 
         internal ReadUserInfo(DataPackage data)
@@ -24,7 +24,7 @@ namespace NewTeach_BLL_Server.UserInfo
             dataSend.Data = AccountInfoConvet.ConvertToBytes(accountInfo);
         }
 
-        internal AccountInfo Response()
+        internal AccountInfo_mod Response()
         {
             Sender sender = new Sender();
             sender.SendMessage(dataSend);
