@@ -87,10 +87,14 @@
     <Compile Include="ImageMessage\ReceiveImage.cs" />
     <Compile Include="ImageMessage\SendImage.cs" />
     <Compile Include="Message\MessageFresh.cs" />
+    <Compile Include="Teach\Classes\General\GetReview.cs" />
     <Compile Include="Teach\Classes\Students\BookClass.cs" />
     <Compile Include="Teach\Classes\Students\CancelClass.cs" />
     <Compile Include="Teach\Classes\General\GetClassInfo.cs" />
+    <Compile Include="Teach\Classes\Students\Deal.cs" />
+    <Compile Include="Teach\Classes\Teachers\ChangeClassState.cs" />
     <Compile Include="Teach\Classes\Teachers\CreateClass.cs" />
+    <Compile Include="Teach\Classes\Students\WriteReview.cs" />
     <Compile Include="Teach\Classes\Teachers\DeleteClass.cs" />
     <Compile Include="Teach\Classes\Teachers\EditClassInfo.cs" />
     <Compile Include="Teach\Classes\Teachers\RemoveStudents.cs" />

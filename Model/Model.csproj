@@ -81,7 +81,9 @@
     <Compile Include="MessageData_mod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sockets\DataPackage.cs" />
+    <Compile Include="Teach\ClassDealList_mod.cs" />
     <Compile Include="Teach\ClassInfo_mod.cs" />
+    <Compile Include="Teach\ClassInfo_Re_mod.cs" />
     <Compile Include="Teach\ClassStudentInfo_mod.cs" />
     <Compile Include="Teach\SelAllFiles_mod.cs" />
     <Compile Include="Teach\SelFileDynamic_mod.cs" />

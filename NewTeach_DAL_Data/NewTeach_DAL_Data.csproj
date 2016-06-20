@@ -68,6 +68,7 @@
     <Compile Include="SelectAccountConvert.cs" />
     <Compile Include="SelUserImageConvert.cs" />
     <Compile Include="Teach\ClassInfoConvert.cs" />
+    <Compile Include="Teach\ClassDealConvert.cs" />
     <Compile Include="Teach\FileSelectionConvert.cs" />
     <Compile Include="Teach\FollowTeacherInfoConvert.cs" />
     <Compile Include="Teach\Re_Convert.cs" />

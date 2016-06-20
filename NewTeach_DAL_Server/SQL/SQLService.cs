@@ -18,6 +18,13 @@ namespace NewTeach_DAL_Server
     //                Cmd.Parameters.Add(new SqlParameter("UN", Passport));
     //                Cmd.Parameters.Add(new SqlParameter("PWD", Password));
 
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////
+        //                                 警告！防注入修改缺失
+        //////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////
     public class SQLService
     {
         string sql = "";
@@ -580,6 +587,11 @@ namespace NewTeach_DAL_Server
             return true;
         }
 
+        public Model.Teach.ClassInfo_mod GetClassInfo(int class_id)
+        {
+            return new Model.Teach.ClassInfo_mod();
+        }
+
         public bool BookClass(int student_id, int class_id)
         {
             //订阅课程
@@ -590,6 +602,18 @@ namespace NewTeach_DAL_Server
         {
             //取消课程
             return true;
+        }
+
+        public bool DealAndWriteReview(int class_id, int student_id, string review)
+        {
+            //交易并写评论
+            return true;
+        }
+
+        public List<Model.Teach.ClassDealList_mod> GetReviews(int class_id)
+        {
+            //查看评论
+            return new List<Model.Teach.ClassDealList_mod>();
         }
 
         public bool AddTeacherFollowRequest(int student_id, int teacher_id)
