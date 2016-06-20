@@ -90,7 +90,7 @@
     <Compile Include="RefreshRequest_mod.cs" />
     <Compile Include="SelectAccount_mod.cs" />
     <Compile Include="Teach\FollowTeacherInfo_mod.cs" />
-    <Compile Include="Teach\FollowTeacherInfo_Re_mod.cs" />
+    <Compile Include="Teach\Re_mod.cs" />
     <Compile Include="UserImage_mod.cs" />
   </ItemGroup>
   <ItemGroup>

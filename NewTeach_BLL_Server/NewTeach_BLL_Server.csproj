@@ -89,7 +89,7 @@
     <Compile Include="Message\MessageFresh.cs" />
     <Compile Include="Teach\Classes\Students\BookClass.cs" />
     <Compile Include="Teach\Classes\Students\CancelClass.cs" />
-    <Compile Include="Teach\Classes\Students\GetClassInfo.cs" />
+    <Compile Include="Teach\Classes\General\GetClassInfo.cs" />
     <Compile Include="Teach\Classes\Teachers\CreateClass.cs" />
     <Compile Include="Teach\Classes\Teachers\DeleteClass.cs" />
     <Compile Include="Teach\Classes\Teachers\EditClassInfo.cs" />

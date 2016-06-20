@@ -33,7 +33,7 @@ namespace NewTeach_BLL_Server.Teach.FollowTeacherRequest.Students
                 sender.SendMessage(new DataPackage
                 {
                     Client = client,
-                    Data = FollowTeacherInfoConvert_Re.ConvertToBytes_Query(new FollowTeacherInfo_Re_mod
+                    Data = Re_Convert.ConvertToBytes_Query(new Re_mod
                     {
                         Uid = fti.Uid,
                         IsSucceed = sql.DeleteTeacherFollow(fti.Student_id, fti.Teacher_id)

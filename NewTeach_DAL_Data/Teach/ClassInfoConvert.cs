@@ -50,16 +50,18 @@ namespace NewTeach_DAL_Data.Teach
 
             csi.Uid = BitConverter.ToInt32(data, 2);
             csi.Student_id = BitConverter.ToInt32(data, 6);
+            csi.Class_id = BitConverter.ToInt32(data, 10);
 
             return csi;
         }
 
         public static byte[] ConvertToBytes_Student(ClassStudentInfo_mod data)
         {
-            byte[] bResult = new byte[8];
+            byte[] bResult = new byte[12];
 
             BitConverter.GetBytes(data.Uid).CopyTo(bResult, 0);
             BitConverter.GetBytes(data.Student_id).CopyTo(bResult, 4);
+            BitConverter.GetBytes(data.Class_id).CopyTo(bResult, 8);
 
             return bResult; 
         }

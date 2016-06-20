@@ -576,7 +576,19 @@ namespace NewTeach_DAL_Server
 
         public bool TeacherTurnDownFollow(int teacher_id, int student_id)
         {
-            //老是拒绝跟随
+            //老师拒绝跟随
+            return true;
+        }
+
+        public bool BookClass(int student_id, int class_id)
+        {
+            //订阅课程
+            return true;
+        }
+
+        public bool CancelClass(int student_id, int class_id)
+        {
+            //取消课程
             return true;
         }
 
@@ -718,23 +730,7 @@ namespace NewTeach_DAL_Server
                 con.Close();
             }
         }
-
-        public bool BookClass(int class_id, int Student)
-        {
-            try
-            {
-                //学生订阅课程
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-            finally
-            {
-
-            }
-        }
+        
 
 
 

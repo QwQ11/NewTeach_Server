@@ -49,7 +49,7 @@ namespace Newtalking_BLL_Server.Teach.FollowTeacherRequest.General
 
                 sender.SendMessage(new DataPackage
                 {
-                    Data = FollowTeacherInfoConvert_Re.ConvertToBytes_Sel(uid),
+                    Data = Re_Convert.ConvertToBytes_SelEnd(uid),
                     Client = client
                 });
             }

@@ -70,7 +70,7 @@
     <Compile Include="Teach\ClassInfoConvert.cs" />
     <Compile Include="Teach\FileSelectionConvert.cs" />
     <Compile Include="Teach\FollowTeacherInfoConvert.cs" />
-    <Compile Include="Teach\FollowTeacherInfoConvert_Re.cs" />
+    <Compile Include="Teach\Re_Convert.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

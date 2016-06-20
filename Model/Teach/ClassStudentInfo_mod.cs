@@ -9,6 +9,7 @@ namespace Model.Teach
     {
         int uid;
         int student_id;
+        int class_id;
 
         public int Uid
         {
@@ -33,6 +34,19 @@ namespace Model.Teach
             set
             {
                 student_id = value;
+            }
+        }
+
+        public int Class_id
+        {
+            get
+            {
+                return class_id;
+            }
+
+            set
+            {
+                class_id = value;
             }
         }
     }
