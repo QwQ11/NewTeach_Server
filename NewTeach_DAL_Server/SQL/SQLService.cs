@@ -592,22 +592,22 @@ namespace NewTeach_DAL_Server
             return new Model.Teach.ClassInfo_mod();
         }
 
-        public bool BookClass(int student_id, int class_id)
+        public short BookClass(int student_id, int class_id)
         {
             //订阅课程
-            return true;
+            return 0;
         }
 
-        public bool CancelClass(int student_id, int class_id)
+        public short CancelClass(int student_id, int class_id)
         {
             //取消课程
-            return true;
+            return 0;
         }
 
-        public bool DealAndWriteReview(int class_id, int student_id, string review)
+        public short DealAndWriteReview(int class_id, int student_id, string review)
         {
             //交易并写评论
-            return true;
+            return 0;
         }
 
         public List<Model.Teach.ClassDealList_mod> GetReviews(int class_id)

@@ -32,7 +32,7 @@ namespace NewTeach_BLL_Server.Teach.FollowTeacherRequest.Teachers
                 sender.SendMessage(new DataPackage
                 {
                     Client = client,
-                    Data = Re_Convert.ConvertToBytes_Query(new Re_mod
+                    Data = Re_Convert.ConvertToBytes_Query(new BoolRe_mod
                     {
                         Uid = fti.Uid,
                         IsSucceed = true
@@ -44,7 +44,7 @@ namespace NewTeach_BLL_Server.Teach.FollowTeacherRequest.Teachers
                 sender.SendMessage(new DataPackage
                 {
                     Client = client,
-                    Data = Re_Convert.ConvertToBytes_Query(new Re_mod
+                    Data = Re_Convert.ConvertToBytes_Query(new BoolRe_mod
                     {
                         Uid = fti.Uid,
                         IsSucceed = false

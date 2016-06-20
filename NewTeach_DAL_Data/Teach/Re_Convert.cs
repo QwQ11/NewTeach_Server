@@ -8,12 +8,22 @@ namespace NewTeach_DAL_Data.Teach
 {
     public static class Re_Convert
     {
-        static public byte[] ConvertToBytes_Query(Re_mod data)
+        static public byte[] ConvertToBytes_Query(BoolRe_mod data)
         {
             byte[] bResult = new byte[6];
 
             BitConverter.GetBytes(data.Uid).CopyTo(bResult, 0);
             BitConverter.GetBytes(data.IsSucceed).CopyTo(bResult, 4);
+
+            return bResult;
+        }
+
+        static public byte[] ConvertToBytes_Op(short op_code, int uid)
+        {
+            byte[] bResult = new byte[6];
+
+            BitConverter.GetBytes(uid).CopyTo(bResult, 0);
+            BitConverter.GetBytes(op_code).CopyTo(bResult, 4);
 
             return bResult;
         }

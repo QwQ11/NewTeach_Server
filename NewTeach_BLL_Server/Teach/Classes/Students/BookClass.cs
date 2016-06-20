@@ -15,42 +15,26 @@ namespace NewTeach_BLL_Server.Teach.Classes.Students
     {
         ClassStudentInfo_mod csi;
         System.Net.Sockets.TcpClient client;
+        int uid;
 
         internal BookClass(DataPackage data)
         {
             csi = ClassInfoConvert.ConvertToClass_Student(data.Data);
             client = data.Client;
+            uid = csi.Uid;
         }
 
         internal void Response()
         {
             SQLService sql = new SQLService();
             Sender sender = new Sender();
-
-            if(sql.BookClass(csi.Student_id,csi.Class_id))
+            
+            sender.SendMessage(new DataPackage
             {
-                sender.SendMessage(new DataPackage
-                {
-                    Client = client,
-                    Data = Re_Convert.ConvertToBytes_Query(new Re_mod
-                    {
-                        Uid = csi.Uid,
-                        IsSucceed = true
-                    })
-                });
-            }
-            else
-            {
-                sender.SendMessage(new DataPackage
-                {
-                    Client = client,
-                    Data = Re_Convert.ConvertToBytes_Query(new Re_mod
-                    {
-                        Uid = csi.Uid,
-                        IsSucceed = false
-                    })
-                });
-            }
+                Client = client,
+                Data = Re_Convert.ConvertToBytes_Op(
+                    sql.BookClass(csi.Student_id, csi.Class_id), uid)
+            });
         }
     }
 }
