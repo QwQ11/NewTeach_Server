@@ -97,6 +97,7 @@
     <Compile Include="Teach\FollowTeacherRequest\General\SelAllFollow.cs" />
     <Compile Include="Teach\FollowTeacherRequest\Students\RequestFollow.cs" />
     <Compile Include="Teach\FollowTeacherRequest\Students\DeleteFollow.cs" />
+    <Compile Include="Teach\FollowTeacherRequest\Teachers\AllowFollow.cs" />
     <Compile Include="Teach\FollowTeacherRequest\Teachers\DeleteFollow.cs" />
     <Compile Include="Teach\FollowTeacherRequest\Teachers\TurnDownFollow.cs" />
     <Compile Include="Teach\SelFiles\SelAllFiles.cs" />

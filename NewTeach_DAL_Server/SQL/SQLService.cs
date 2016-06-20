@@ -568,6 +568,12 @@ namespace NewTeach_DAL_Server
             return null;
         }
 
+        public bool TeacherAllowFollow(int teacher_id, int student_id)
+        {
+            //老师通过跟随
+            return true;
+        }
+
         public bool AddTeacherFollowRequest(int student_id, int teacher_id)
         {
             try
@@ -704,6 +710,23 @@ namespace NewTeach_DAL_Server
             finally
             {
                 con.Close();
+            }
+        }
+
+        public bool BookClass(int class_id, int Student)
+        {
+            try
+            {
+                //学生订阅课程
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+
             }
         }
 
