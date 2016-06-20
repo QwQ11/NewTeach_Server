@@ -574,6 +574,12 @@ namespace NewTeach_DAL_Server
             return true;
         }
 
+        public bool TeacherTurnDownFollow(int teacher_id, int student_id)
+        {
+            //老是拒绝跟随
+            return true;
+        }
+
         public bool AddTeacherFollowRequest(int student_id, int teacher_id)
         {
             try
