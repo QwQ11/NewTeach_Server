@@ -462,6 +462,10 @@ namespace NewTeach_DAL_Server
                 com.ExecuteNonQuery();
                 //从文件动态表中删除
 
+                sql = "DELETE FROM file_dynamic WHERE file_name=" + file_name + " AND teacher_id=" + user_id;
+                com = new MySQLCommand(sql, con);
+                com.ExecuteNonQuery();
+
                 return true;
             }
             catch

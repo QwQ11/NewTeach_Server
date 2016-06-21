@@ -31,7 +31,7 @@ namespace NewTeach_BLL_Server.Following
                 Sender sender = new Sender();
                 DataPackage dpk = new DataPackage();
                 dpk.Client = client;
-                dpk.Data = FollowingConvert.ConvertToBytes(followingData, sql.AddFollowing(followingData));
+                dpk.Data = FollowingConvert.ConvertToBytes(followingData.Uid, sql.AddFollowing(followingData));
 
                 return sender.SendMessage(dpk);
                 //bool isSucceed = sql.AddFollowing(add);

@@ -8,7 +8,6 @@ using System.Collections;
 using NewTeach_BLL_Server.Account;
 using NewTeach_BLL_Server.File;
 using NewTeach_BLL_Server.Message;
-using NewTeach_BLL_Server.UserInfo;
 using NewTeach_BLL_Server.Following;
 using Model.Sockets;
 
