@@ -43,6 +43,8 @@ namespace NewTeach_DAL_Data
 
         static public FileInfo_mod ConvertToClass_Transport(byte[] data)
         {
+            return ConvertToClass_Transport(JsonBytesConvert.ToJson(data));
+            /*
             FileInfo_mod fileRequest = new FileInfo_mod();
             fileRequest.Uid = BitConverter.ToInt32(data, 2);
             fileRequest.User_id = BitConverter.ToInt32(data, 6);
@@ -59,6 +61,7 @@ namespace NewTeach_DAL_Data
 
             fileRequest.FileKey = Encoding.Default.GetString(data, 271, 16);
             return fileRequest;
+            */
         }
 
         static public UploadFileRequest_mod ConvertToClass_FileUpLoad(string jData) {
@@ -93,6 +96,8 @@ namespace NewTeach_DAL_Data
 
         static public UploadFileRequest_mod ConvertToClass_FileUpLoad(byte[] data)
         {
+            return ConvertToClass_FileUpLoad(JsonBytesConvert.ToJson(data));
+            /*
             UploadFileRequest_mod receiveFile = new UploadFileRequest_mod();
             receiveFile.Uid = BitConverter.ToInt32(data, 2);
             receiveFile.User_id = BitConverter.ToInt32(data, 6);
@@ -101,6 +106,7 @@ namespace NewTeach_DAL_Data
             receiveFile.File_name_length = BitConverter.ToInt16(data, 16);
             receiveFile.File_name = Encoding.Default.GetString(data, 18, receiveFile.File_name_length);
             return receiveFile;
+            */
         }
 
         static public string ConvertToJson_FileInfo(FileInfo_mod data) {
@@ -135,6 +141,8 @@ namespace NewTeach_DAL_Data
 
         static public byte[] ConvertToBytes_FileInfo(FileInfo_mod data)
         {
+            return JsonBytesConvert.ToBytes(ConvertToJson_FileInfo(data));
+            /*
             byte[] bResult = new byte[285];
             BitConverter.GetBytes(data.Uid).CopyTo(bResult, 0);
             BitConverter.GetBytes(data.User_id).CopyTo(bResult, 4);
@@ -144,6 +152,7 @@ namespace NewTeach_DAL_Data
             Encoding.Default.GetBytes(data.FileKey).CopyTo(bResult, 269);
 
             return bResult;
+            */
         }
 
         static public string ConvertToJson_Response(FileRequestResponse_mod frr) {
@@ -170,12 +179,15 @@ namespace NewTeach_DAL_Data
 
         static public byte[] ConvertToBytes_Response(FileRequestResponse_mod frr)
         {
+            return JsonBytesConvert.ToBytes(ConvertToJson_Response(frr));
+            /*
             byte[] data = new byte[6];
 
             BitConverter.GetBytes(frr.Uid).CopyTo(data, 0);
             BitConverter.GetBytes(frr.Op_code).CopyTo(data, 4);
 
             return data;
+            */
         }
     }
 }

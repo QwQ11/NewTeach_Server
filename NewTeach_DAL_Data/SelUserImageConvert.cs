@@ -34,6 +34,8 @@ namespace NewTeach_DAL_Data
 
         static public UserImage_mod ConvertToClass(byte[] data)
         {
+            return ConvertToClass(JsonBytesConvert.ToJson(data));
+            /*
             UserImage_mod userImage = new UserImage_mod();
 
             userImage.Uid = BitConverter.ToInt32(data, 2);
@@ -41,6 +43,7 @@ namespace NewTeach_DAL_Data
             userImage.File_length = BitConverter.ToInt32(data, 10);
 
             return userImage;
+            */
         }
 
         static public string ConvertToJson(UserImage_mod data) {
@@ -69,6 +72,8 @@ namespace NewTeach_DAL_Data
 
         static public byte[] ConvertToBytes(UserImage_mod data)
         {
+            return JsonBytesConvert.ToBytes(ConvertToJson(data));
+            /*
             byte[] bResult = new byte[12];
 
             BitConverter.GetBytes(data.Uid).CopyTo(bResult, 0);
@@ -76,6 +81,7 @@ namespace NewTeach_DAL_Data
             BitConverter.GetBytes(data.File_length).CopyTo(bResult, 8);
 
             return bResult;
+            */
         }
     }
 }

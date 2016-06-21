@@ -31,20 +31,22 @@ namespace NewTeach_DAL_Data
 
         static public RefreshRequest_mod ConvertToClass(byte[] data)
         {
-            RefreshRequest_mod rr = new RefreshRequest_mod();
-            rr.Uid = BitConverter.ToInt32(data, 2);
-            rr.User_id = BitConverter.ToInt32(data, 6);
+            return ConvertToClass(JsonBytesConvert.ToJson(data));
+            //RefreshRequest_mod rr = new RefreshRequest_mod();
+            //rr.Uid = BitConverter.ToInt32(data, 2);
+            //rr.User_id = BitConverter.ToInt32(data, 6);
 
-            return rr;
+            //return rr;
         }
 
         static public byte[] ConvertToBytes_End(Int32 uid) {
-            byte[] bResult = new byte[8];
+            return JsonBytesConvert.ToBytes(ConvertToJson_End(uid), 2);
+            //byte[] bResult = new byte[8];
 
-            BitConverter.GetBytes((short)2).CopyTo(bResult, 0);
-            BitConverter.GetBytes(uid).CopyTo(bResult, 2);
+            //BitConverter.GetBytes((short)2).CopyTo(bResult, 0);
+            //BitConverter.GetBytes(uid).CopyTo(bResult, 2);
 
-            return bResult;
+            //return bResult;
         }
 
         static public string ConvertToJson_End(Int32 uid) {

@@ -37,16 +37,17 @@ namespace NewTeach_DAL_Data
         }
         static public byte[] ConvertToBytes(MessageData_mod data)
         {
-            byte[] bResult = new byte[1452];
+            return JsonBytesConvert.ToBytes(ConvertToJson(data));
+            //byte[] bResult = new byte[1452];
 
-            short type = 1;
-            BitConverter.GetBytes(type).CopyTo(bResult, 0);
-            BitConverter.GetBytes(data.User_id).CopyTo(bResult, 2);
-            BitConverter.GetBytes(data.Receiver_id).CopyTo(bResult, 6);
-            BitConverter.GetBytes(data.Time.Ticks).CopyTo(bResult, 10);
-            Encoding.Default.GetBytes(data.Message).CopyTo(bResult, 18);
+            //short type = 1;
+            //BitConverter.GetBytes(type).CopyTo(bResult, 0);
+            //BitConverter.GetBytes(data.User_id).CopyTo(bResult, 2);
+            //BitConverter.GetBytes(data.Receiver_id).CopyTo(bResult, 6);
+            //BitConverter.GetBytes(data.Time.Ticks).CopyTo(bResult, 10);
+            //Encoding.Default.GetBytes(data.Message).CopyTo(bResult, 18);
 
-            return bResult;
+            //return bResult;
         }
 
         static public MessageData_mod ConvertToClass(string jData) {
@@ -76,21 +77,22 @@ namespace NewTeach_DAL_Data
         }
 
         static public MessageData_mod ConvertToClass(byte[] bReceived) {
-            MessageData_mod dataResult = new MessageData_mod();
+            return ConvertToClass(JsonBytesConvert.ToJson(bReceived));
+            //MessageData_mod dataResult = new MessageData_mod();
 
-            dataResult.User_id = BitConverter.ToInt32(bReceived, 2);
-            dataResult.Receiver_id = BitConverter.ToInt32(bReceived, 6);
-            long timeTick = BitConverter.ToInt64(bReceived, 10);
-            dataResult.Time = new DateTime(timeTick);
-            string msgTemp = Encoding.Default.GetString(bReceived, 18, 1434);
+            //dataResult.User_id = BitConverter.ToInt32(bReceived, 2);
+            //dataResult.Receiver_id = BitConverter.ToInt32(bReceived, 6);
+            //long timeTick = BitConverter.ToInt64(bReceived, 10);
+            //dataResult.Time = new DateTime(timeTick);
+            //string msgTemp = Encoding.Default.GetString(bReceived, 18, 1434);
 
-            foreach (char c in msgTemp) {
-                if (c == '\0')
-                    break;
-                dataResult.Message += c;
-            }
+            //foreach (char c in msgTemp) {
+            //    if (c == '\0')
+            //        break;
+            //    dataResult.Message += c;
+            //}
 
-            return dataResult;
+            //return dataResult;
         }
     }
 }
