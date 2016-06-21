@@ -18,11 +18,11 @@ namespace NewTeach_DAL_Data
             return followingData;
         }
 
-        static public byte[] ConvertToBytes(FollowingData_mod data, bool isSucceed)
+        static public byte[] ConvertToBytes(int uid, bool isSucceed)
         {
             byte[] bResult = new byte[6];
 
-            BitConverter.GetBytes(data.User_id).CopyTo(bResult, 0);
+            BitConverter.GetBytes(uid).CopyTo(bResult, 0);
             BitConverter.GetBytes(isSucceed).CopyTo(bResult, 4);
 
             return bResult;

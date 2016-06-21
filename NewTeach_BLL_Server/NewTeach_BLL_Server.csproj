@@ -106,10 +106,10 @@
     <Compile Include="Teach\SelFiles\SelAllFiles.cs" />
     <Compile Include="Teach\SelFiles\SelFileDynamic.cs" />
     <Compile Include="Teach\SelFiles\SelTeacherFile.cs" />
-    <Compile Include="UserInfo\EditAccountInfo.cs" />
+    <Compile Include="Account\EditAccountInfo.cs" />
     <Compile Include="Message\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserInfo\ReadUserInfo.cs" />
+    <Compile Include="Account\ReadUserInfo.cs" />
     <Compile Include="File\SendFile.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,9 +18,10 @@ namespace Newtalking_BLL_Server.Teach.SelFiles
         Model.Teach.SelFileDynamic_mod sfd;
         System.Net.Sockets.TcpClient client;
 
-        internal SelFileDynamic(DataPackage data)
+        internal SelFileDynamic(DataPackage data, int user_id)
         {
             sfd = FileSelectionConvert.ConvertToClass_SelDynamic(data.Data);
+            sfd.Student_id = user_id;
             client = data.Client;
         }
 

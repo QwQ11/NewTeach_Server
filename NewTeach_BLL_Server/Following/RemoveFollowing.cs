@@ -32,7 +32,7 @@ namespace NewTeach_BLL_Server.Following
                 Sender sender = new Sender();
                 DataPackage dpk = new DataPackage();
                 dpk.Client = client;
-                dpk.Data = FollowingConvert.ConvertToBytes(followingData, isSucceed);
+                dpk.Data = FollowingConvert.ConvertToBytes(followingData.Uid, isSucceed);
                 sender.SendMessage(dpk);
 
                 return true;
