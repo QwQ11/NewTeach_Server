@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Model;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace NewTeach_DAL_Data
 {
@@ -16,6 +18,27 @@ namespace NewTeach_DAL_Data
             followingData.Following_id = BitConverter.ToInt32(data, 10);
 
             return followingData;
+        }
+
+        static public string ConvertToJson(FollowingData_mod data, bool ifSucceed) {
+            var sw = new StringWriter();
+            var writer = new JsonTextWriter(sw);
+
+            writer.Formatting = Formatting.Indented;
+            writer.WriteStartObject();
+            writer.WritePropertyName("following");
+            writer.WritePropertyName("userid");
+            writer.WriteValue(data.User_id);
+            writer.WritePropertyName("ifsuccessed");
+            writer.WriteValue(ifSucceed);
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+
+            writer.Flush();
+            var str = sw.ToString();
+            sw.Close();
+
+            return str;
         }
 
         static public byte[] ConvertToBytes(FollowingData_mod data, bool isSucceed)
