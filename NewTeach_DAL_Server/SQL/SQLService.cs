@@ -19,12 +19,12 @@ namespace NewTeach_DAL_Server
     //                Cmd.Parameters.Add(new SqlParameter("PWD", Password));
 
 
-        //////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////
-        //                                 警告！防注入修改缺失
-        //////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////
+    //                                 警告！防注入修改缺失
+    //////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////
     public class SQLService
     {
         string sql = "";
@@ -64,10 +64,10 @@ namespace NewTeach_DAL_Server
                 com = new MySQLCommand(sql, con);
                 DbDataReader reader = com.ExecuteReader();
                 int user_id = 0;
-                if(reader.Read())
+                if (reader.Read())
                 {
                     user_id = (int)reader["user_id"];
-                } 
+                }
                 sql = "INSERT INTO users_information VALUES(null,null,null,null)";
                 com = new MySQLCommand(sql, con);
                 com.ExecuteNonQuery();
@@ -87,7 +87,7 @@ namespace NewTeach_DAL_Server
                 sql = "SELECT* FROM users_information WHERE user_id = " + user_id;
                 MySQLCommand com = new MySQLCommand(sql, con);
                 DbDataReader reader = com.ExecuteReader();
-                if(reader.Read())
+                if (reader.Read())
                 {
                     AccountInfo_mod accountInfo = new AccountInfo_mod();
                     accountInfo.Sex = (short)reader["user_sex"];
@@ -239,7 +239,7 @@ namespace NewTeach_DAL_Server
 
                 return messages;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -282,7 +282,7 @@ namespace NewTeach_DAL_Server
                     sql = "SELECT * FROM users INNER JOIN users_information ON users.user_id = " + Int32.Parse(selAccount.Sel_info);
                     com = new MySQLCommand(sql, con);
                     DbDataReader reader = com.ExecuteReader();
-                    if(reader.Read())
+                    if (reader.Read())
                     {
                         AccountInfo_mod accountInfo = new AccountInfo_mod();
                         accountInfo.User_id = Int32.Parse(reader["user_id"].ToString());
@@ -300,7 +300,7 @@ namespace NewTeach_DAL_Server
 
                 return arr;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -323,7 +323,7 @@ namespace NewTeach_DAL_Server
                 sql = "SELECT * FROM black_list WHERE user_id=" + data.User_id + " and black_id=" + data.Following_id;
                 com = new MySQLCommand(sql, con);
                 MySQLDataReader reader = com.ExecuteReaderEx();
-                if(reader.Read())
+                if (reader.Read())
                 {
                     sql = "DELETE FROM black_list WHERE user_id=" + data.User_id + " and black_id=" + data.Following_id;
                     com = new MySQLCommand(sql, con);
@@ -351,7 +351,7 @@ namespace NewTeach_DAL_Server
                 sql = "SELECT * FROM following_list where user_id=" + data.User_id + " and follow_id=" + data.Following_id;
                 MySQLCommand com = new MySQLCommand(sql, con);
                 MySQLDataReader reader = com.ExecuteReaderEx();
-                if(reader.Read())
+                if (reader.Read())
                 {
                     sql = "DELETE FROM following_list where user_id=" + data.User_id + " and follow_id=" + data.Following_id;
                     com = new MySQLCommand(sql, con);
@@ -393,7 +393,7 @@ namespace NewTeach_DAL_Server
             }
         }
 
-        public bool InsertUserImage(int user_id,string strFileName)
+        public bool InsertUserImage(int user_id, string strFileName)
         {
             try
             {
@@ -457,7 +457,7 @@ namespace NewTeach_DAL_Server
                 if (!reader.Read())
                     return false;
 
-                sql= "DELETE FROM files WHERE file_name=" + file_name + " AND user_id=" + user_id + " AND file_key=" + file_key;
+                sql = "DELETE FROM files WHERE file_name=" + file_name + " AND user_id=" + user_id + " AND file_key=" + file_key;
                 com = new MySQLCommand(sql, con);
                 com.ExecuteNonQuery();
                 //从文件动态表中删除
@@ -493,7 +493,7 @@ namespace NewTeach_DAL_Server
                     com.ExecuteNonQuery();
                     //添加到文件动态表
                 }
-                
+
                 return true;
             }
             catch
@@ -506,7 +506,7 @@ namespace NewTeach_DAL_Server
             }
         }
 
-        public bool CheckFileKey(int user_id,string strFileName,string strFileKey)
+        public bool CheckFileKey(int user_id, string strFileName, string strFileKey)
         {
             try
             {
@@ -589,6 +589,7 @@ namespace NewTeach_DAL_Server
 
         public Model.Teach.ClassInfo_mod GetClassInfo(int class_id)
         {
+            //获取课时
             return new Model.Teach.ClassInfo_mod();
         }
 
@@ -614,6 +615,36 @@ namespace NewTeach_DAL_Server
         {
             //查看评论
             return new List<Model.Teach.ClassDealList_mod>();
+        }
+
+        public short ChangeClassState(int class_id, int teacher_id, short state)
+        {
+            //更改课时状态
+            return 0;
+        }
+
+        public short CreateClass(Model.Teach.ClassInfo_mod cif)
+        {
+            //创建课程
+            return 0;
+        }
+
+        public short DeleteClass(int class_id, int teacher_id)
+        {
+            //删除课程
+            return 0;
+        }
+
+        public short EditClassInfo(Model.Teach.ClassInfo_mod cif)
+        {
+            //修改课程信息
+            return 0;
+        }
+
+        public short RemoveStudents(int class_id, int student_id, int teacher_id)
+        {
+            //删出学生
+            return 0;
         }
 
         public bool AddTeacherFollowRequest(int student_id, int teacher_id)

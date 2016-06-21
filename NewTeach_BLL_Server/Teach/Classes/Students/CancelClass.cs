@@ -17,9 +17,10 @@ namespace NewTeach_BLL_Server.Teach.Classes.Students
         System.Net.Sockets.TcpClient client;
         int uid;
 
-        internal CancelClass(DataPackage data)
+        internal CancelClass(DataPackage data, int user_id)
         {
             csi = ClassInfoConvert.ConvertToClass_Student(data.Data);
+            csi.Student_id = user_id;
             client = data.Client;
             uid = csi.Uid;
         }

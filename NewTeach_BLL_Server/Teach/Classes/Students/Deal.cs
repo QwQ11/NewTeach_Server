@@ -17,9 +17,10 @@ namespace NewTeach_BLL_Server.Teach.Classes.Students
         System.Net.Sockets.TcpClient client;
         int uid;
 
-        internal Deal(DataPackage data)
+        internal Deal(DataPackage data, int user_id)
         {
             cdl = ClassDealConvert.ConvertToClass(data.Data);
+            cdl.Student_id = user_id;
             client = data.Client;
             uid = cdl.Uid;
         }
