@@ -3,11 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Model;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace NewTeach_DAL_Data
 {
-    static public class LoginDataConvert
-    {
+    static public class LoginDataConvert {
+
+        static public string ConvertToJson(bool boolean, int uid) {
+            var sw = new StringWriter();
+            var writer = new JsonTextWriter(sw);
+
+            writer.Formatting = Formatting.Indented;
+            writer.WriteStartObject();
+            writer.WritePropertyName("logindata");
+            writer.WriteStartObject();
+            writer.WritePropertyName("uid");
+            writer.WriteValue(uid);
+            writer.WritePropertyName("ifsuccessed");
+            writer.WriteValue(boolean);
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+
+            writer.Flush();
+            var str = sw.ToString();
+            sw.Close();
+
+            return str;
+        }
+
         static public byte[] ConvertToBytes(bool boolean, int uid)
         {
             byte[] bResult = new byte[8];
@@ -16,6 +40,29 @@ namespace NewTeach_DAL_Data
             BitConverter.GetBytes(boolean).CopyTo(bResult, 6);
 
             return bResult;
+        }
+
+        static public LoginData_mod ConvertToClass(string jData) {
+            LoginData_mod r = new LoginData_mod();
+
+            var sr = new StringReader(jData);
+            var reader = new JsonTextReader(sr);
+
+            while (reader.Read()) {
+                switch (reader.Path) {
+                    case "logindata.uid":
+                        r.Uid = reader.ReadAsInt32().Value;
+                        break;
+                    case "logindata.userid":
+                        r.User_id = reader.ReadAsInt32().Value;
+                        break;
+                    case "logindata.password":
+                        r.User_password = reader.ReadAsString();
+                        break;
+                }
+            }
+            sr.Close();
+            return r;
         }
 
         static public LoginData_mod ConvertToClass(byte[] data)
@@ -36,8 +83,30 @@ namespace NewTeach_DAL_Data
         }
     }
 
-    static public class AccountRequestConvert
-    {
+    static public class AccountRequestConvert {
+        static public LoginData_mod ConvertToClass(string jData) {
+            LoginData_mod r = new LoginData_mod();
+
+            var sr = new StringReader(jData);
+            var reader = new JsonTextReader(sr);
+
+            while (reader.Read()) {
+                switch (reader.Path) {
+                    case "logindata.uid":
+                        r.Uid = reader.ReadAsInt32().Value;
+                        break;
+                    case "logindata.type":
+                        r.Type = (short)reader.ReadAsInt32().Value;
+                        break;
+                    case "logindata.password":
+                        r.User_password = reader.ReadAsString();
+                        break;
+                }
+            }
+            sr.Close();
+            return r;
+        }
+
         static public LoginData_mod ConvertToClass(byte[] data)
         {
             LoginData_mod dataResult = new LoginData_mod();
@@ -51,6 +120,31 @@ namespace NewTeach_DAL_Data
                 dataResult.User_password += c;
             }
             return dataResult;
+        }
+
+        static public string ConvertToJson(LoginData_mod data) {
+            // Type: 2
+            var sw = new StringWriter();
+            var writer = new JsonTextWriter(sw);
+
+            writer.Formatting = Formatting.Indented;
+            writer.WriteStartObject();
+            writer.WritePropertyName("logindata");
+            writer.WriteStartObject();
+            writer.WritePropertyName("uid");
+            writer.WriteValue(data.Uid);
+            writer.WritePropertyName("userid");
+            writer.WriteValue(data.User_id);
+            writer.WritePropertyName("type");
+            writer.WriteValue(data.Type);
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+
+            writer.Flush();
+            var str = sw.ToString();
+            sw.Close();
+
+            return str;
         }
 
         static public byte[] ConvertToBytes(LoginData_mod data)
