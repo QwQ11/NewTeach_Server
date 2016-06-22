@@ -49,6 +49,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,6 +64,7 @@
     <Compile Include="AccountInfoConvet.cs" />
     <Compile Include="FileInfoConvert.cs" />
     <Compile Include="FollowingConvert.cs" />
+    <Compile Include="JsonBytesConvert.cs" />
     <Compile Include="LoginDataConvert.cs" />
     <Compile Include="MessageDataConvert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
