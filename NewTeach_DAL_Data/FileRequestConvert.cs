@@ -37,6 +37,8 @@ namespace NewTeach_DAL_Data
 
         static public FileRequest ConvertToClass_SendDelete(byte[] data)
         {
+            return ConvertToClass_SendDelete(JsonBytesConvert.ToJson(data));
+            /*
             FileRequest fileRequest = new FileRequest();
             fileRequest.Uid = BitConverter.ToInt32(data, 2);
             fileRequest.User_id = BitConverter.ToInt32(data, 6);
@@ -51,6 +53,35 @@ namespace NewTeach_DAL_Data
 
             fileRequest.FileKey = Encoding.Default.GetString(data, 265, 16);
             return fileRequest;
+            */
+        }
+
+        static public ReceiveFileRequest ConvertToClass_Receive(string jData)
+        {
+            UploadFileRequest_mod r = new UploadFileRequest_mod();
+
+            var sr = new StringReader(jData);
+            var reader = new JsonTextReader(sr);
+
+            while (reader.Read()) {
+                switch (reader.Path) {
+                    case "fileinfo.uid":
+                        r.Uid = reader.ReadAsInt32().Value;
+                        break;
+                    case "fileinfo.userid":
+                        r.User_id = reader.ReadAsInt32().Value;
+                        break;
+                    case "fileinfo.filelength":
+                        r.File_length = reader.ReadAsInt32().Value;
+                        break;
+                    case "fileinfo.filename":
+                        r.File_name = reader.ReadAsString();
+                        r.File_name_length = (short)r.File_name.Length;
+                        break;
+                }
+            }
+            sr.Close();
+            return r;
         }
 
         static public ReceiveFileRequest ConvertToClass_Receive(string jData)
