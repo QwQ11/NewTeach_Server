@@ -12,8 +12,8 @@ CREATE TABLE black_list(user_id INTEGER, black_id INTEGER, FOREIGN KEY(user_id) 
 ;
 CREATE TABLE files(user_id INTEGER, file_type TINYINT, file_name VARCHAR(255), file_key CHAR(16), file_length INTEGER);    --1 Private -2 Public
 CREATE TABLE students(state TINYINT, teacher_id INTEGER, student_id INTEGER);    --1 Allowed -2 Not Allowed -3被拒绝
-CREATE TABLE classes(teacher_id INTEGER, subject TINYINT, start_time DATETIME, end_time DATETIME, class_id INTEGER, class_state TINYINT, student_count INTEGER, class_intruduction VARCHER(200), FOREIGN KEY(teacher_id) REFERENCES users(user_id));   -- 1-未开始 2-正在授课 3-授课已结束 4-课时被取消
-CREATE TABLE deal_list(class_id INTEGER, student_id INTEGER, deal_state TINYINT, deal_price INTEGER, review VARCHER(500), FOREIGN KEY(class_id) REFERENCES classes(class_id));
+CREATE TABLE classes(teacher_id INTEGER, subject TINYINT, start_time DATETIME, end_time DATETIME, class_id INTEGER, class_state TINYINT, student_count INTEGER, class_introuduction VARCHER(200), FOREIGN KEY(teacher_id) REFERENCES users(user_id));   -- 1-未开始 2-正在授课 3-授课已结束 4-课时被取消
+CREATE TABLE deal_list(class_id INTEGER, student_id INTEGER, deal_state TINYINT, deal_price INTEGER, review VARCHER(500), FOREIGN KEY(class_id) REFERENCES classes(class_id));  --1 未交易 2 已交易
 CREATE TABLE file_dynamic(teacher_id INTEGER, student_id INTEGER, file_name VARCHER(255), FOREIGN KEY(file_name) REFERENCES files(file_name));
 CREATE TABLE class_dynamic(student_id INTEGER, class_id INTEGER, FOREIGN KEY(class_id) REFERENCES classes(class_id));
 

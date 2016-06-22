@@ -31,7 +31,7 @@ namespace Newtalking_BLL_Server.Teach.SelFiles
             try
             {
                 SQLService sql = new SQLService();
-                List<FileInfo_mod> arrFiles = sql.SelAllFiles(saf.Student_id);
+                List<FileInfo_mod> arrFiles = sql.SelAllFiles(saf.Student_id, saf.Uid);
 
                 foreach (FileInfo_mod fi in arrFiles)
                 {

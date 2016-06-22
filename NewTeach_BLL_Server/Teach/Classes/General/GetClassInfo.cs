@@ -27,11 +27,10 @@ namespace NewTeach_BLL_Server.Teach.Classes.Students
             SQLService sql = new SQLService();
             Sender sender = new Sender();
 
-            ClassInfo_mod ciRece = sql.GetClassInfo(ci.Class_id);
+            ClassInfo_mod ciRece = sql.GetClassInfo(ci.Class_id, ci.Uid);
 
             if (ciRece != null)
             {
-                ciRece.Uid = ci.Uid;
                 sender.SendMessage(new DataPackage
                 {
                     Client = client,

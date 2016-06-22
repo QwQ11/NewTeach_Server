@@ -34,7 +34,7 @@ namespace NewTeach_BLL_Server.Teach.Classes.Students
             {
                 Client = client,
                 Data = Re_Convert.ConvertToBytes_Op(
-                    sql.BookClass(csi.Student_id, csi.Class_id), uid)
+                    sql.BookClass(csi.Student_id,csi.Class_id), uid)
             });
         }
     }

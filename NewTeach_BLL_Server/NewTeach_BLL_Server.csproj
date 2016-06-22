@@ -92,6 +92,8 @@
     <Compile Include="Teach\Classes\Students\CancelClass.cs" />
     <Compile Include="Teach\Classes\General\GetClassInfo.cs" />
     <Compile Include="Teach\Classes\Students\Deal.cs" />
+    <Compile Include="Teach\Classes\Students\SelAllBookClass.cs" />
+    <Compile Include="Teach\Classes\Students\SelClassDynamic.cs" />
     <Compile Include="Teach\Classes\Teachers\ChangeClassState.cs" />
     <Compile Include="Teach\Classes\Teachers\CreateClass.cs" />
     <Compile Include="Teach\Classes\Teachers\DeleteClass.cs" />

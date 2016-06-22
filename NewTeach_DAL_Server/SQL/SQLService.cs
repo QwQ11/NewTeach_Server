@@ -55,7 +55,8 @@ namespace NewTeach_DAL_Server
 
         public int AccountRequest(string pwd, short type)
         {
-            try {
+            try
+            {
                 con.Open();
                 sql = "INSERT INTO users(user_password, type) VALUES(" + pwd + "," + type + ")";
                 MySQLCommand com = new MySQLCommand(sql, con);
@@ -82,7 +83,8 @@ namespace NewTeach_DAL_Server
 
         public AccountInfo_mod AccountInfoReader(int user_id)
         {
-            try {
+            try
+            {
                 con.Open();
                 sql = "SELECT* FROM users_information WHERE user_id = " + user_id;
                 MySQLCommand com = new MySQLCommand(sql, con);
@@ -112,7 +114,7 @@ namespace NewTeach_DAL_Server
             try
             {
                 con.Open();
-                sql = "UPDATE user_sex = " + accountInfo.Sex + ", user_birthday = '" + accountInfo.Birthday.ToString("yyyy-MM-dd") + "', user_phone = " + accountInfo.Phone + " FROM users_information WHERE user_id = " + accountInfo.User_id;
+                sql = "UPDATE users_information SET user_sex = " + accountInfo.Sex + ", user_birthday = '" + accountInfo.Birthday.ToString("yyyy-MM-dd") + "', user_phone = " + accountInfo.Phone + " WHERE user_id = " + accountInfo.User_id;
                 MySQLCommand com = new MySQLCommand(sql, con);
                 com.ExecuteNonQuery();
                 return true;
@@ -496,6 +498,19 @@ namespace NewTeach_DAL_Server
                     com = new MySQLCommand(sql, con);
                     com.ExecuteNonQuery();
                     //添加到文件动态表
+
+                    sql = "SELECT * FROM students WHERE teacher_id=" + user_id;
+                    com = new MySQLCommand(sql, con);
+                    reader = com.ExecuteReaderEx();
+
+                    List<int> arrStudents = new List<int>();
+                    while (reader.Read())
+                        arrStudents.Add((int)reader["student_id"]);
+
+                    foreach (int student_id in arrStudents)
+                    {
+                        sql = "INSERT INTO file_dynamic(teacher_id, student_id, file_name) VALUES(" + user_id + "," + student_id + "," + strFileName + ")";
+                    }
                 }
 
                 return true;
@@ -542,7 +557,13 @@ namespace NewTeach_DAL_Server
         {
             try
             {
+                //UPDATE Person SET FirstName = 'Fred' WHERE LastName = 'Wilson' 
                 //改变文件可见程度
+                con.Open();
+                sql = "UPDATE files SET file_type=" + file_type + " WHERE file_name=" + file_name + " AND user_id=" + user_id;
+                MySQLCommand com = new MySQLCommand(sql, con);
+                com.ExecuteNonQuery();
+
                 return true;
             }
             catch
@@ -551,61 +572,295 @@ namespace NewTeach_DAL_Server
             }
             finally
             {
-
+                con.Close();
             }
         }
 
-        public List<Model.FileInfo_mod> SelTeacherFiles(int student_id, int teacher_id)
+        public List<Model.FileInfo_mod> SelTeacherFiles(int student_id, int teacher_id, int uid)
         {
-            //查看一个老师所有文件（若没有跟随则查看共享文件）
-            return null;
+            try
+            {
+                //查看一个老师所有文件（若没有跟随则查看共享文件）
+
+                con.Open();
+                sql = "SELECT * FROM students WHERE student_id=" + student_id + " AND teacher_id=" + teacher_id + " AND state=1";
+                MySQLCommand com = new MySQLCommand(sql, con);
+
+                DbDataReader reader = com.ExecuteReaderEx();
+                if (reader.Read())
+                {
+                    sql = "SELECT * FROM files WHERE user_id=" + teacher_id;
+                }
+                else
+                    sql = "SELECT * FROM files WHERE user_id=" + teacher_id + " AND file_type=2";
+
+                reader = com.ExecuteReaderEx();
+                List<Model.FileInfo_mod> arr = new List<FileInfo_mod>();
+                while (reader.Read())
+                {
+                    arr.Add(new FileInfo_mod
+                    {
+                        Uid = uid,
+                        User_id = (int)reader["user_id"],
+                        File_type = (short)reader["file_type"],
+                        FileName = reader["file_name"].ToString(),
+                        FileKey = reader["file_key"].ToString(),
+                        File_length = (int)reader["file_length"]
+                    });
+                }
+
+                return arr;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
-        public List<Model.FileInfo_mod> SelFileDynamic(int student_id)
+        public List<Model.FileInfo_mod> SelFileDynamic(int student_id, int uid)
         {
-            //查看文件动态
-            return null;
+            try
+            {
+                con.Open();
+                //查看文件动态
+                sql = "SELECT * FROM deal_list INNER JOIN file_dynamic ON deal_list.file_name = file_dynamic.file_name WHERE file_dynamic.student_id =  " + student_id;
+                MySQLCommand com = new MySQLCommand(sql, con);
+
+                DbDataReader reader = com.ExecuteReaderEx();
+                List<Model.FileInfo_mod> arr = new List<FileInfo_mod>();
+                while (reader.Read())
+                {
+                    arr.Add(new FileInfo_mod
+                    {
+                        Uid=uid,
+                        User_id = (int)reader["user_id"],
+                        File_type = (short)reader["file_type"],
+                        FileName = reader["file_name"].ToString(),
+                        FileKey = reader["file_key"].ToString(),
+                        File_length = (int)reader["file_length"]
+                    });
+                }
+
+                return arr;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         public bool DelFileDynamic(int student_id)
         {
-            //清除文件动态
-            return true;
+            try
+            {
+                con.Open();
+                //清除文件动态
+                sql = "DELETE FROM file_dynamic WHERE student_id=" + student_id;
+                MySQLCommand com = new MySQLCommand(sql, con);
+                com.ExecuteNonQuery();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
-        public List<Model.FileInfo_mod> SelAllFiles(int student_id)
+        public List<Model.FileInfo_mod> SelAllFiles(int student_id, int uid)
         {
             //查询所有文件
-            return null;
+            try
+            {
+                con.Open();
+                sql = "SELECT * FROM students INNER JOIN files ON students.student_id = files.student_id WHERE students.student_id = " + student_id;
+
+                MySQLCommand com = new MySQLCommand(sql, con);
+
+                DbDataReader reader = com.ExecuteReaderEx();
+                List<Model.FileInfo_mod> arr = new List<FileInfo_mod>();
+                while (reader.Read())
+                {
+                    arr.Add(new FileInfo_mod
+                    {
+                        Uid = uid,
+                        User_id = (int)reader["user_id"],
+                        File_type = (short)reader["file_type"],
+                        FileName = reader["file_name"].ToString(),
+                        FileKey = reader["file_key"].ToString(),
+                        File_length = (int)reader["file_length"]
+                    });
+                }
+
+                return arr;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         public bool TeacherAllowFollow(int teacher_id, int student_id)
         {
             //老师通过跟随
-            return true;
+            try
+            {
+                con.Open();
+                sql = "UPDATE students SET state=1 Where teacher_id=" + teacher_id + " AND student_id=" + student_id;
+                MySQLCommand com = new MySQLCommand(sql, con);
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         public bool TeacherTurnDownFollow(int teacher_id, int student_id)
         {
             //老师拒绝跟随
-            return true;
+            try
+            {
+                con.Open();
+                sql = "UPDATE students SET state=3 WHERE teacher_id=" + teacher_id + " AND student_id=" + student_id;
+                MySQLCommand com = new MySQLCommand(sql, con);
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
-        public Model.Teach.ClassInfo_mod GetClassInfo(int class_id)
+        public Model.Teach.ClassInfo_mod GetClassInfo(int class_id, int uid)
         {
             //获取课时
-            return new Model.Teach.ClassInfo_mod();
+            try
+            {
+                con.Open();
+                sql = "SELECT * FROM classes WHERE class_id=" + class_id;
+                MySQLCommand com = new MySQLCommand(sql, con);
+                DbDataReader reader = com.ExecuteReaderEx();
+
+                if (reader.Read())
+                {
+                    return new Model.Teach.ClassInfo_mod
+                    {
+                        Uid = uid,
+                        Teacher_id = (int)reader["teacher_id"],
+                        Subject = (short)reader["subject"],
+                        Start_time = new DateTime((long)reader["start_time"]),
+                        End_time = new DateTime((long)reader["end_time"]),
+                        Class_id = (int)reader["class_id"],
+                        Class_state = (short)reader["class_state"],
+                        Student_count = (int)reader["student_count"],
+                        Class_introduction = reader["class_introduction"].ToString()
+                    };
+                }
+                else
+                    return null;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         public short BookClass(int student_id, int class_id)
         {
             //订阅课程
-            return 0;
+            try
+            {
+                con.Open();
+                sql = "SELECT * FROM classes WHERE class_id=" + class_id;
+                MySQLCommand com = new MySQLCommand(sql, con);
+                DbDataReader reader = com.ExecuteReaderEx();
+
+                if (reader.Read())
+                {
+                    int teacher_id = (int)reader["teacher_id"];
+
+                    sql = "SELECT * FROM students WHERE teacher_id=" + teacher_id + " AND student_id=" + student_id;
+                    com = new MySQLCommand(sql, con);
+                    reader = com.ExecuteReaderEx();
+                    if (reader.Read())
+                    {
+
+                        sql = "SELECT * FROM deal_list WHERE class_id=" + class_id + " AND student_id=" + student_id;
+                        com = new MySQLCommand(sql, con);
+                        reader = com.ExecuteReaderEx();
+                        if (reader.Read())
+                        {
+                            return Flags.DealFlags.NotDealt;
+                        }
+                        else
+                        {
+                            sql = "INSERT INTO deal_list(class_id,student_id,deal_state) VALUES(" + class_id + "," + student_id + ",1)";
+                            com = new MySQLCommand(sql, con);
+                            com.ExecuteNonQuery();
+                            return Flags.DealFlags.Dealt;
+                        }
+                    }
+                    else
+                    {
+                        return Flags.DealFlags.NotDealt;
+                    }
+                }
+                else
+                {
+                    return Flags.DealFlags.NotDealt;
+                }
+            }
+            catch
+            {
+                return Flags.DealFlags.NotDealt;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool DelClassDynamic(int student_id)
+        {
+            //删除课程动态
+            return true;
         }
 
         public short CancelClass(int student_id, int class_id)
         {
             //取消课程
+
             return 0;
         }
 
@@ -630,6 +885,7 @@ namespace NewTeach_DAL_Server
         public short CreateClass(Model.Teach.ClassInfo_mod cif)
         {
             //创建课程
+            //加入动态
             return 0;
         }
 
@@ -651,6 +907,13 @@ namespace NewTeach_DAL_Server
             return 0;
         }
 
+        public List<Model.Teach.ClassInfo_mod> SelClassDynamic(int student_id, int uid)
+        {
+            //查询课时动态
+            //SELECT * FROM deal_list INNER JOIN file_dynamic ON deal_list.file_name = file_dynamic.file_name WHERE file_dynamic.student_id = ?
+            return new List<Model.Teach.ClassInfo_mod>();
+        }
+
         public bool AddTeacherFollowRequest(int student_id, int teacher_id)
         {
             try
@@ -661,7 +924,7 @@ namespace NewTeach_DAL_Server
                 MySQLCommand com = new MySQLCommand(sql, con);
 
                 DbDataReader reader = com.ExecuteReader();
-                if(reader.Read())
+                if (reader.Read())
                 {
                     if (Int16.Parse(reader["state"].ToString()) == 1)
                         return false;
@@ -670,7 +933,7 @@ namespace NewTeach_DAL_Server
                 }
                 else
                 {
-                    sql = "INSERT INTO students(state,teacher_id,student_id) VALUES(" + 2 + "," + teacher_id + "," + student_id + ")";
+                    sql = "INSERT INTO students(state,teacher_id,student_id) VALUES(2," + teacher_id + "," + student_id + ")";
                     com = new MySQLCommand(sql, con);
                     com.ExecuteNonQuery();
                     return true;
@@ -688,13 +951,51 @@ namespace NewTeach_DAL_Server
             }
         }
 
+        public List<Model.Teach.ClassInfo_mod> SelAllBookClass(int student_id, int uid)
+        {
+            try
+            {
+                con.Open();
+                sql = "";
+                MySQLCommand com = new MySQLCommand(sql, con);
+                DbDataReader reader = com.ExecuteReader();
+                List<Model.Teach.ClassInfo_mod> arrCif = new List<Model.Teach.ClassInfo_mod>();
+
+                while(reader.Read())
+                {
+                    arrCif.Add(new Model.Teach.ClassInfo_mod
+                    {
+                        Uid = uid,
+                        Teacher_id = (int)reader["teacher_id"],
+                        Subject = (short)reader["subject"],
+                        Start_time = new DateTime((long)reader["start_time"]),
+                        End_time = new DateTime((long)reader["end_time"]),
+                        Class_id = (int)reader["class_id"],
+                        Class_state = (short)reader["class_state"],
+                        Student_count = (int)reader["student_count"],
+                        Class_introduction = reader["class_introduction"].ToString()
+                    });
+                }
+
+                return arrCif;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public bool DeleteTeacherFollow(int student_id, int teacher_id)
         {
             try
             {
                 con.Open();
 
-                sql = "SELECT * FROM students WHERE teacher_id=" + teacher_id + " AND student_id=" + student_id ;
+                sql = "SELECT * FROM students WHERE teacher_id=" + teacher_id + " AND student_id=" + student_id;
                 MySQLCommand com = new MySQLCommand(sql, con);
 
                 DbDataReader reader = com.ExecuteReader();
@@ -789,34 +1090,34 @@ namespace NewTeach_DAL_Server
                 con.Close();
             }
         }
-        
+
 
 
 
         //public bool DelOverMessages(int bool)
 
-//         --插入用户
-//INSERT INTO users(user_name, user_password) VALUES(?, ?);
+        //         --插入用户
+        //INSERT INTO users(user_name, user_password) VALUES(?, ?);
 
-//--搜索最大值
-//SELECT LAST_INSERT_ID();
+        //--搜索最大值
+        //SELECT LAST_INSERT_ID();
 
-//--插入用户资料
-//INSERT INTO users_information VALUES(?, ?, ?, ?);
+        //--插入用户资料
+        //INSERT INTO users_information VALUES(?, ?, ?, ?);
 
-//--修改全部信息
-//UPDATE user_sex = ?, user_birthday = ?, user_phone = ? FROM users_information WHERE user_id = ?;
+        //--修改全部信息
+        //UPDATE user_sex = ?, user_birthday = ?, user_phone = ? FROM users_information WHERE user_id = ?;
 
-//--修改密码
-//UPDATE user_password FROM users WHERE user_id = ?;
+        //--修改密码
+        //UPDATE user_password FROM users WHERE user_id = ?;
 
-//--查找密码
-//SELECT user_password FROM users WHERE user_id = ?;
+        //--查找密码
+        //SELECT user_password FROM users WHERE user_id = ?;
 
-//--查找全部信息
-//SELECT* FROM users_information WHERE user_id = ?;
+        //--查找全部信息
+        //SELECT* FROM users_information WHERE user_id = ?;
 
-//--查找用户名
-//SELECT user_name FROM users WHERE user_id = ?;
+        //--查找用户名
+        //SELECT user_name FROM users WHERE user_id = ?;
     }
 }

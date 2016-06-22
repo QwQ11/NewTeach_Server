@@ -32,7 +32,7 @@ namespace Newtalking_BLL_Server.Teach.SelFiles
             try
             {
                 SQLService sql = new SQLService();
-                List<FileInfo_mod> arrFiles = sql.SelFileDynamic(sfd.Student_id);
+                List<FileInfo_mod> arrFiles = sql.SelFileDynamic(sfd.Student_id, sfd.Uid);
 
                 foreach (FileInfo_mod fi in arrFiles)
                 {
