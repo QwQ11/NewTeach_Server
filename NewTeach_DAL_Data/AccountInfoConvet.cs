@@ -8,7 +8,7 @@ using System.IO;
 
 namespace NewTeach_DAL_Data
 {
-    static public class AccountInfoConvet {
+    static public class AccountInfoConvert {
         static public string ConvertToJson(AccountInfo_mod data) {
             var sw = new StringWriter();
             var writer = new JsonTextWriter(sw);
@@ -36,9 +36,11 @@ namespace NewTeach_DAL_Data
 
             return str;
         }
-
+        
         static public byte[] ConvertToBytes(AccountInfo_mod data)
         {
+            return Encoding.Default.GetBytes(ConvertToJson(data));
+            /*
             //4+2+4+24
             byte[] bResult = new byte[48];
 
@@ -50,8 +52,9 @@ namespace NewTeach_DAL_Data
             Encoding.Default.GetBytes(data.Phone).CopyTo(bResult, 20);
 
             return bResult;
+            */
         }
-
+        
         static public AccountInfo_mod ConvertToClass(string jData) {
             AccountInfo_mod r = new AccountInfo_mod();
 
@@ -83,6 +86,9 @@ namespace NewTeach_DAL_Data
 
         static public AccountInfo_mod ConvertToClass(byte[] data)
         {
+            var json = Encoding.Default.GetString(data);
+            return ConvertToClass(data);
+            /*
             AccountInfo_mod dataResult = new AccountInfo_mod();
 
             dataResult.User_id = BitConverter.ToInt32(data, 2);
@@ -98,6 +104,7 @@ namespace NewTeach_DAL_Data
             }
 
             return dataResult;
+            */
         }
 
         static public string ConvertToJson_Re(bool boolean, Int32 uid) {
@@ -125,6 +132,15 @@ namespace NewTeach_DAL_Data
 
         static public byte[] ConvertToBytes_Re(bool boolean, Int32 uid)
         {
+            var json = ConvertToJson_Re(boolean, uid);
+            var jBytes = Encoding.Default.GetBytes(json);
+            var r = new Byte[jBytes.Length + 2];
+            BitConverter.GetBytes((short)2).CopyTo(r, 0);
+            jBytes.CopyTo(r, 2);
+
+            return r;
+
+            /*
             byte[] bResult = new byte[8];
 
             BitConverter.GetBytes((short)2).CopyTo(bResult, 0);
@@ -132,6 +148,7 @@ namespace NewTeach_DAL_Data
             BitConverter.GetBytes(boolean).CopyTo(bResult, 6);
 
             return bResult;
+            */
         }
     }
 }

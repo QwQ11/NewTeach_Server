@@ -17,11 +17,11 @@ namespace NewTeach_BLL_Server.Account
 
         internal ReadUserInfo(DataPackage data)
         {
-            accountInfo = AccountInfoConvet.ConvertToClass(data.Data);
+            accountInfo = AccountInfoConvert.ConvertToClass(data.Data);
             SQLService sql = new SQLService();
             accountInfo = sql.AccountInfoReader(accountInfo.User_id);
             dataSend.Client = data.Client;
-            dataSend.Data = AccountInfoConvet.ConvertToBytes(accountInfo);
+            dataSend.Data = AccountInfoConvert.ConvertToBytes(accountInfo);
         }
 
         internal AccountInfo_mod Response()

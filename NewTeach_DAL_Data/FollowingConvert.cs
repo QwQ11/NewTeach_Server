@@ -10,12 +10,14 @@ namespace NewTeach_DAL_Data
 {
     static public class FollowingConvert {
         static public FollowingData_mod ConvertToClass(byte[] data) {
-            FollowingData_mod followingData = new FollowingData_mod();
-            followingData.Uid = BitConverter.ToInt32(data, 2);
-            followingData.User_id = BitConverter.ToInt32(data, 6);
-            followingData.Following_id = BitConverter.ToInt32(data, 10);
+            return ConvertToClass(JsonBytesConvert.ToJson(data));
 
-            return followingData;
+            //FollowingData_mod followingData = new FollowingData_mod();
+            //followingData.Uid = BitConverter.ToInt32(data, 2);
+            //followingData.User_id = BitConverter.ToInt32(data, 6);
+            //followingData.Following_id = BitConverter.ToInt32(data, 10);
+
+            //return followingData;
         }
         static public FollowingData_mod ConvertToClass(string jData) {
             FollowingData_mod r = new FollowingData_mod();
@@ -37,7 +39,7 @@ namespace NewTeach_DAL_Data
             return r;
         }
 
-        static public string ConvertToJson(FollowingData_mod data, bool ifSucceed) {
+        static public string ConvertToJson(int uid, bool ifSucceed) {
             var sw = new StringWriter();
             var writer = new JsonTextWriter(sw);
 
@@ -46,10 +48,7 @@ namespace NewTeach_DAL_Data
             writer.WritePropertyName("following");
             writer.WriteStartObject();
             writer.WritePropertyName("uid");
-            writer.WriteValue(data.Uid);
-            writer.WritePropertyName("userid");
-            writer.WriteValue(data.User_id);
-            writer.WritePropertyName("ifsuccessed");
+            writer.WriteValue(uid);
             writer.WriteValue(ifSucceed);
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -63,12 +62,13 @@ namespace NewTeach_DAL_Data
 
         static public byte[] ConvertToBytes(int uid, bool isSucceed)
         {
-            byte[] bResult = new byte[6];
+            return JsonBytesConvert.ToBytes(ConvertToJson(uid, isSucceed));
+            //byte[] bResult = new byte[6];
 
-            BitConverter.GetBytes(uid).CopyTo(bResult, 0);
-            BitConverter.GetBytes(isSucceed).CopyTo(bResult, 4);
+            //BitConverter.GetBytes(uid).CopyTo(bResult, 0);
+            //BitConverter.GetBytes(isSucceed).CopyTo(bResult, 4);
 
-            return bResult;
+            //return bResult;
         }
     }
 }

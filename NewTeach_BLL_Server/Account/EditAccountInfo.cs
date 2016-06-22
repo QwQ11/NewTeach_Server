@@ -18,7 +18,7 @@ namespace NewTeach_BLL_Server.Account
 
         internal EditAccountInfo(DataPackage data, int user_id)
         {
-            accountInfo = AccountInfoConvet.ConvertToClass(data.Data);
+            accountInfo = AccountInfoConvert.ConvertToClass(data.Data);
             accountInfo.User_id = user_id;
             dataSend.Client = data.Client;
         }
@@ -27,7 +27,7 @@ namespace NewTeach_BLL_Server.Account
         {
             SQLService sql = new SQLService();
             bool isSucceed = sql.AccountInfoEditor(accountInfo);
-            dataSend.Data = AccountInfoConvet.ConvertToBytes_Re(isSucceed, accountInfo.Uid);
+            dataSend.Data = AccountInfoConvert.ConvertToBytes_Re(isSucceed, accountInfo.Uid);
             Sender sender = new Sender();
             sender.SendMessage(dataSend);
         }

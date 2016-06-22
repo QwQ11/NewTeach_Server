@@ -31,7 +31,7 @@ namespace NewTeach_BLL_Server.Account
                 {
                     Sender sender = new Sender();
                     DataPackage dpk = new DataPackage();
-                    AccountInfoConvet.ConvertToBytes((AccountInfo_mod)obj);
+                    AccountInfoConvert.ConvertToBytes((AccountInfo_mod)obj);
                     dpk.Client = client;
                     sender.SendMessage(dpk);
                 }
