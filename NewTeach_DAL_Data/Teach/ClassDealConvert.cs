@@ -89,7 +89,7 @@ namespace NewTeach_DAL_Data.Teach
 
         static public byte[] ConvertToBytes(ClassDealList_mod data)
         {
-            return JsonBytesConvert.ToBytes(ConvertToJson(data));
+            return JsonBytesConvert.ToBytes(ConvertToJson(data),2);
             //byte[] bResult = new byte[518];
 
             //BitConverter.GetBytes(data.Uid).CopyTo(bResult, 0);

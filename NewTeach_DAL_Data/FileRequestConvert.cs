@@ -123,7 +123,7 @@ namespace NewTeach_DAL_Data
 
         static public byte[] ConvertToBytes_Response(FileRequestResponse frr)
         {
-            return JsonBytesConvert.ToBytes(ConvertToJson_Response(frr));
+            return JsonBytesConvert.ToBytes(ConvertToJson_Response(frr),2);
             //byte[] data = new byte[6];
 
             //BitConverter.GetBytes(frr.Uid).CopyTo(data, 0);

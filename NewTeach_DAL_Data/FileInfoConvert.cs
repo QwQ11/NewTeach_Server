@@ -141,7 +141,7 @@ namespace NewTeach_DAL_Data
 
         static public byte[] ConvertToBytes_FileInfo(FileInfo_mod data)
         {
-            return JsonBytesConvert.ToBytes(ConvertToJson_FileInfo(data));
+            return JsonBytesConvert.ToBytes(ConvertToJson_FileInfo(data),2);
             /*
             byte[] bResult = new byte[285];
             BitConverter.GetBytes(data.Uid).CopyTo(bResult, 0);

@@ -34,7 +34,7 @@ namespace NewTeach_DAL_Data.Teach
 
         static public byte[] ConvertToBytes_Query(BoolRe_mod data)
         {
-            return JsonBytesConvert.ToBytes(ConvertToJson_Query(data));
+            return JsonBytesConvert.ToBytes(ConvertToJson_Query(data),2);
             //byte[] bResult = new byte[6];
 
             //BitConverter.GetBytes(data.Uid).CopyTo(bResult, 0);
@@ -67,7 +67,7 @@ namespace NewTeach_DAL_Data.Teach
 
         static public byte[] ConvertToBytes_Op(short op_code, int uid)
         {
-            return JsonBytesConvert.ToBytes(ConvertToJson_Op(op_code, uid));
+            return JsonBytesConvert.ToBytes(ConvertToJson_Op(op_code, uid),2);
             //byte[] bResult = new byte[6];
 
             //BitConverter.GetBytes(uid).CopyTo(bResult, 0);
