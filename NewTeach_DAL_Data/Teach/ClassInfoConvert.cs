@@ -109,7 +109,7 @@ namespace NewTeach_DAL_Data.Teach
 
         public static byte[] ConvertToBytes_Info(ClassInfo_mod data)
         {
-            return JsonBytesConvert.ToBytes(ConvertToJson_Info(data));
+            return JsonBytesConvert.ToBytes(ConvertToJson_Info(data), 2)
             //byte[] bResult = new byte[236];
 
             //BitConverter.GetBytes(data.Uid).CopyTo(bResult, 0);
@@ -186,7 +186,7 @@ namespace NewTeach_DAL_Data.Teach
 
         public static byte[] ConvertToBytes_Student(ClassStudentInfo_mod data)
         {
-            return JsonBytesConvert.ToBytes(ConvertToJson_Info(data));
+            return JsonBytesConvert.ToBytes(ConvertToJson_Info(data), 2)
             //byte[] bResult = new byte[12];
 
             //BitConverter.GetBytes(data.Uid).CopyTo(bResult, 0);

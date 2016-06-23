@@ -72,7 +72,7 @@ namespace NewTeach_DAL_Data
 
         static public byte[] ConvertToBytes(UserImage_mod data)
         {
-            return JsonBytesConvert.ToBytes(ConvertToJson(data));
+            return JsonBytesConvert.ToBytes(ConvertToJson(data), 2)
             /*
             byte[] bResult = new byte[12];
 

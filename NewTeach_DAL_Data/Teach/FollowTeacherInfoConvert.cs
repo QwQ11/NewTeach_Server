@@ -77,7 +77,7 @@ namespace NewTeach_DAL_Data.Teach
 
         static public byte[] ConvertToBytes(FollowTeacherInfo_mod data)
         {
-            return JsonBytesConvert.ToBytes(ConvertToJson(data));
+            return JsonBytesConvert.ToBytes(ConvertToJson(data), 2)
             //byte[] bResult = new byte[14];
 
             //BitConverter.GetBytes(data.Uid).CopyTo(bResult, 0);
